@@ -84,7 +84,10 @@ export default function Home() {
     setShowConfirm(false);
   };
 
-  const confirmationText = `Please confirm the *pickup time* for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\nPax : ${form.adult} adult\nHotel : ${form.hotel}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}\n\nPlease mentioned if there is any additional charge for transfer collect from customer`;
+  const confirmationText =
+    form.addressOption === "without"
+      ? `Please confirm the for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\nPax : ${form.adult} adult\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}`
+      : `Please confirm the *pickup time* for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\nPax : ${form.adult} adult\nHotel : ${form.hotel}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}\n\nPlease mentioned if there is any additional charge for transfer collect from customer`;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(confirmationText);
