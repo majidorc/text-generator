@@ -149,7 +149,7 @@ export default function Home() {
           <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
             Operator Form
           </Typography>
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             {/* Top fields */}
             <Grid item xs={12} md={4}>
               <TextField
@@ -251,6 +251,10 @@ export default function Home() {
               </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
+              {/* Phone number label for consistent style, less gap */}
+              <Typography sx={{ color: '#fff', fontWeight: 500, mb: 0.5, fontSize: 16 }}>
+                phoneNumber :
+              </Typography>
               <PhoneInput
                 country={"th"}
                 value={form.phoneNumber}
@@ -272,7 +276,7 @@ export default function Home() {
                   background: "#322b4d",
                   color: "#000",
                 }}
-                specialLabel={<span style={{ fontWeight: 500 }}>phoneNumber :</span>}
+                specialLabel=""
                 inputProps={{
                   name: "phoneNumber",
                   required: false,
