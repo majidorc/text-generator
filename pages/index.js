@@ -132,68 +132,71 @@ export default function Home() {
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "#2d2746", color: "#fff", py: 6 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: "bold" }}>
-          Operator Form
-        </Typography>
+      <Container maxWidth="md">
         <Box
           component="form"
           onSubmit={handleSubmit}
           sx={{
             mt: 4,
-            p: 3,
-            borderRadius: 2,
-            bgcolor: "#2d2746",
-            boxShadow: 3,
+            p: { xs: 2, md: 4 },
+            borderRadius: 4,
+            bgcolor: "#241f3a",
+            boxShadow: "0 4px 32px 0 rgba(80, 70, 180, 0.15)",
+            maxWidth: 1100,
+            mx: "auto",
           }}
         >
+          <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
+            Operator Form
+          </Typography>
           <Grid container spacing={3}>
+            {/* Top fields */}
             <Grid item xs={12} md={4}>
               <TextField
                 fullWidth
                 required
-                label="Booking Number :*"
+                label={<span style={{ fontWeight: 500 }}>Booking Number :*</span>}
                 name="bookingNumber"
                 value={form.bookingNumber}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
+                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
                 fullWidth
                 required
-                label="Program :*"
+                label={<span style={{ fontWeight: 500 }}>Program :*</span>}
                 name="program"
                 value={form.program}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
+                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
                 fullWidth
                 required
-                label="Name :*"
+                label={<span style={{ fontWeight: 500 }}>Name :*</span>}
                 name="name"
                 value={form.name}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
+                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="Tour Date :*"
+                  label={<span style={{ fontWeight: 500 }}>Tour Date :*</span>}
                   value={form.tourDate}
                   onChange={handleDateChange}
                   renderInput={(params) => (
@@ -202,30 +205,28 @@ export default function Home() {
                       fullWidth
                       required
                       variant="outlined"
-                      InputProps={{ style: { color: "#fff" } }}
+                      InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
                       InputLabelProps={{ style: { color: "#fff" } }}
-                      sx={{ bgcolor: "#322b4d" }}
+                      sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
                     />
                   )}
                 />
               </LocalizationProvider>
             </Grid>
             <Grid item xs={12} md={4}>
-              {form.addressOption !== "without" && (
-                <TextField
-                  fullWidth
-                  label="Hotel :"
-                  name="hotel"
-                  value={form.hotel}
-                  onChange={handleChange}
-                  variant="outlined"
-                  InputProps={{ style: { color: "#fff" } }}
-                  InputLabelProps={{ style: { color: "#fff" } }}
-                  sx={{ bgcolor: "#322b4d" }}
-                />
-              )}
+              <TextField
+                fullWidth
+                label={<span style={{ fontWeight: 500 }}>Hotel :</span>}
+                name="hotel"
+                value={form.hotel}
+                onChange={handleChange}
+                variant="outlined"
+                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
+              />
               <FormControl component="fieldset" sx={{ mt: 2 }}>
-                <FormLabel component="legend" sx={{ color: "#fff" }}>
+                <FormLabel component="legend" sx={{ color: "#fff", fontWeight: 500 }}>
                   Address Option
                 </FormLabel>
                 <RadioGroup
@@ -233,16 +234,18 @@ export default function Home() {
                   name="addressOption"
                   value={form.addressOption}
                   onChange={handleChange}
+                  sx={{ mt: 1 }}
                 >
                   <FormControlLabel
                     value="without"
                     control={<Radio sx={{ color: "#fff" }} />}
-                    label="Without Address"
+                    label={<span style={{ fontWeight: 400 }}>Without Address</span>}
+                    sx={{ mr: 3 }}
                   />
                   <FormControlLabel
                     value="sendLater"
                     control={<Radio sx={{ color: "#fff" }} />}
-                    label="Send Later"
+                    label={<span style={{ fontWeight: 400 }}>Send Later</span>}
                   />
                 </RadioGroup>
               </FormControl>
@@ -257,8 +260,8 @@ export default function Home() {
                   background: "#322b4d",
                   color: "#fff",
                   border: "1px solid #6c63a7",
-                  borderRadius: 4,
-                  height: 56,
+                  borderRadius: 8,
+                  height: 48,
                   fontSize: 16,
                 }}
                 buttonStyle={{
@@ -269,7 +272,7 @@ export default function Home() {
                   background: "#322b4d",
                   color: "#000",
                 }}
-                specialLabel="phoneNumber :"
+                specialLabel={<span style={{ fontWeight: 500 }}>phoneNumber :</span>}
                 inputProps={{
                   name: "phoneNumber",
                   required: false,
@@ -277,24 +280,24 @@ export default function Home() {
                 }}
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            {/* Adult and PAX fields */}
+            <Grid item xs={12} md={4} sx={{ mt: 2 }}>
               <TextField
                 fullWidth
                 required
-                label="Adult :*"
+                label={<span style={{ fontWeight: 500 }}>Adult :*</span>}
                 name="adult"
                 type="number"
                 value={form.adult}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
+                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
-            {/* Move PAX rows directly under Adult field */}
             {paxRows.length > 0 && (
-              <Grid item xs={12} md={8} container spacing={2} alignItems="center">
+              <Grid item xs={12} md={8} container spacing={2} alignItems="center" sx={{ mt: 2 }}>
                 {paxRows.map((row, idx) => (
                   <Grid item xs={12} md={6} key={idx} container spacing={1} alignItems="center">
                     <Grid item xs={5}>
@@ -304,8 +307,8 @@ export default function Home() {
                         value={row.count}
                         onChange={e => handlePaxCountChange(idx, e.target.value)}
                         variant="outlined"
-                        InputProps={{ style: { color: "#fff" } }}
-                        sx={{ bgcolor: "#322b4d" }}
+                        InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                        sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
                       />
                     </Grid>
                     <Grid item xs={5}>
@@ -315,8 +318,8 @@ export default function Home() {
                         value={row.type}
                         onChange={e => handlePaxTypeChange(idx, e.target.value)}
                         variant="outlined"
-                        InputProps={{ style: { color: "#fff" } }}
-                        sx={{ bgcolor: "#322b4d" }}
+                        InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                        sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
                       >
                         <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
                           child
@@ -327,7 +330,7 @@ export default function Home() {
                       </TextField>
                     </Grid>
                     <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8' }}>
+                      <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8', borderRadius: 1, p: 1, transition: 'background 0.2s', '&:hover': { background: '#3a2e6e' } }}>
                         <DeleteIcon />
                       </Button>
                     </Grid>
@@ -338,28 +341,28 @@ export default function Home() {
             <Grid item xs={12}>
               <Button
                 variant="text"
-                sx={{ color: "#a084e8", ml: 1 }}
+                sx={{ color: "#a084e8", ml: 1, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, transition: 'color 0.2s', '&:hover': { color: '#fff' } }}
                 onClick={handleAddPax}
               >
                 + Add Pax
               </Button>
             </Grid>
-            <Grid item xs={12} md={4}>
+            {/* Cash Tours and National Park Fee fields follow */}
+            <Grid item xs={12} md={4} sx={{ mt: 2 }}>
               <TextField
                 fullWidth
                 required
-                label="Cash Tours :*"
+                label={<span style={{ fontWeight: 500 }}>Cash Tours :*</span>}
                 name="cashTours"
                 value={form.cashTours}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
+                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
-              {/* National Park Fee radio group under Cash Tours */}
               <FormControl component="fieldset" sx={{ mt: 2 }}>
-                <FormLabel component="legend" sx={{ color: "#fff" }}>
+                <FormLabel component="legend" sx={{ color: "#fff", fontWeight: 500 }}>
                   National Park Fee
                 </FormLabel>
                 <RadioGroup
@@ -374,26 +377,29 @@ export default function Home() {
                       cashTours: value === 'none' ? 'None' : 'National Park Fee',
                     }));
                   }}
+                  sx={{ mt: 1 }}
                 >
                   <FormControlLabel
                     value="none"
                     control={<Radio sx={{ color: "#fff" }} />}
-                    label="None"
+                    label={<span style={{ fontWeight: 400 }}>None</span>}
+                    sx={{ mr: 3 }}
                   />
                   <FormControlLabel
                     value="fee"
                     control={<Radio sx={{ color: "#fff" }} />}
-                    label="National Park Fee"
+                    label={<span style={{ fontWeight: 400 }}>National Park Fee</span>}
                   />
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sx={{ display: "flex", gap: 2 }}>
-              <Button type="submit" variant="contained" color="primary">
-                Submit
+            {/* Buttons */}
+            <Grid item xs={12} sx={{ display: "flex", gap: 2, mt: 4 }}>
+              <Button type="submit" variant="contained" sx={{ bgcolor: "#7ecbff", color: '#222', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#4fa3d1' } }}>
+                SUBMIT
               </Button>
-              <Button variant="outlined" color="secondary" onClick={handleClear}>
-                Clear
+              <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+                CLEAR
               </Button>
             </Grid>
           </Grid>
