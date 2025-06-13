@@ -40,7 +40,19 @@ export default function Home() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    if (name === "addressOption") {
+      if (value === "without") {
+        setForm((prev) => ({ ...prev, addressOption: value, hotel: "" }));
+      } else if (value === "sendLater") {
+        setForm((prev) => ({ ...prev, addressOption: value, hotel: "Send Later" }));
+      } else {
+        setForm((prev) => ({ ...prev, addressOption: value }));
+      }
+    } else if (name === "hotel") {
+      setForm((prev) => ({ ...prev, hotel: value }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handlePhoneChange = (value) => {
@@ -160,17 +172,41 @@ export default function Home() {
               </LocalizationProvider>
             </Grid>
             <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="Hotel :"
-                name="hotel"
-                value={form.hotel}
-                onChange={handleChange}
-                variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
-                InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
-              />
+              {form.addressOption !== "without" && (
+                <TextField
+                  fullWidth
+                  label="Hotel :"
+                  name="hotel"
+                  value={form.hotel}
+                  onChange={handleChange}
+                  variant="outlined"
+                  InputProps={{ style: { color: "#fff" } }}
+                  InputLabelProps={{ style: { color: "#fff" } }}
+                  sx={{ bgcolor: "#322b4d" }}
+                />
+              )}
+              <FormControl component="fieldset" sx={{ mt: 2 }}>
+                <FormLabel component="legend" sx={{ color: "#fff" }}>
+                  Address Option
+                </FormLabel>
+                <RadioGroup
+                  row
+                  name="addressOption"
+                  value={form.addressOption}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value="without"
+                    control={<Radio sx={{ color: "#fff" }} />}
+                    label="Without Address"
+                  />
+                  <FormControlLabel
+                    value="sendLater"
+                    control={<Radio sx={{ color: "#fff" }} />}
+                    label="Send Later"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
               <PhoneInput
@@ -201,30 +237,6 @@ export default function Home() {
                   autoFocus: false,
                 }}
               />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend" sx={{ color: "#fff" }}>
-                  Address Option
-                </FormLabel>
-                <RadioGroup
-                  row
-                  name="addressOption"
-                  value={form.addressOption}
-                  onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value="without"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label="Without Address"
-                  />
-                  <FormControlLabel
-                    value="sendLater"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label="Send Later"
-                  />
-                </RadioGroup>
-              </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
