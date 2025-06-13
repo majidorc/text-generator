@@ -281,50 +281,6 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label="Cash Tours :*"
-                name="cashTours"
-                value={form.cashTours}
-                onChange={handleChange}
-                variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
-                InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
-              />
-              {/* National Park Fee radio group under Cash Tours */}
-              <FormControl component="fieldset" sx={{ mt: 2 }}>
-                <FormLabel component="legend" sx={{ color: "#fff" }}>
-                  National Park Fee
-                </FormLabel>
-                <RadioGroup
-                  row
-                  name="parkFee"
-                  value={form.parkFee}
-                  onChange={e => {
-                    const value = e.target.value;
-                    setForm(prev => ({
-                      ...prev,
-                      parkFee: value,
-                      cashTours: value === 'none' ? 'None' : 'National Park Fee',
-                    }));
-                  }}
-                >
-                  <FormControlLabel
-                    value="none"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label="None"
-                  />
-                  <FormControlLabel
-                    value="fee"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label="National Park Fee"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                required
                 label="Adult :*"
                 name="adult"
                 type="number"
@@ -336,7 +292,7 @@ export default function Home() {
                 sx={{ bgcolor: "#322b4d" }}
               />
             </Grid>
-            {/* PAX rows styled like Adult field, in a single row if possible */}
+            {/* Move PAX rows directly under Adult field */}
             {paxRows.length > 0 && (
               <Grid item xs={12} md={8} container spacing={2} alignItems="center">
                 {paxRows.map((row, idx) => (
@@ -387,6 +343,50 @@ export default function Home() {
               >
                 + Add Pax
               </Button>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <TextField
+                fullWidth
+                required
+                label="Cash Tours :*"
+                name="cashTours"
+                value={form.cashTours}
+                onChange={handleChange}
+                variant="outlined"
+                InputProps={{ style: { color: "#fff" } }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+                sx={{ bgcolor: "#322b4d" }}
+              />
+              {/* National Park Fee radio group under Cash Tours */}
+              <FormControl component="fieldset" sx={{ mt: 2 }}>
+                <FormLabel component="legend" sx={{ color: "#fff" }}>
+                  National Park Fee
+                </FormLabel>
+                <RadioGroup
+                  row
+                  name="parkFee"
+                  value={form.parkFee}
+                  onChange={e => {
+                    const value = e.target.value;
+                    setForm(prev => ({
+                      ...prev,
+                      parkFee: value,
+                      cashTours: value === 'none' ? 'None' : 'National Park Fee',
+                    }));
+                  }}
+                >
+                  <FormControlLabel
+                    value="none"
+                    control={<Radio sx={{ color: "#fff" }} />}
+                    label="None"
+                  />
+                  <FormControlLabel
+                    value="fee"
+                    control={<Radio sx={{ color: "#fff" }} />}
+                    label="National Park Fee"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Grid>
             <Grid item xs={12} sx={{ display: "flex", gap: 2 }}>
               <Button type="submit" variant="contained" color="primary">
