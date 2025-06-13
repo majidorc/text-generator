@@ -139,9 +139,9 @@ export default function Home() {
           sx={{
             mt: 4,
             p: { xs: 2, md: 4 },
-            borderRadius: 4,
-            bgcolor: "#241f3a",
-            boxShadow: "0 4px 32px 0 rgba(80, 70, 180, 0.15)",
+            borderRadius: 2,
+            bgcolor: "#29224a",
+            boxShadow: "none",
             maxWidth: 1100,
             mx: "auto",
           }}
