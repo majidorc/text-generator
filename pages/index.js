@@ -290,6 +290,36 @@ export default function Home() {
                 InputLabelProps={{ style: { color: "#fff" } }}
                 sx={{ bgcolor: "#322b4d" }}
               />
+              {/* National Park Fee radio group under Cash Tours */}
+              <FormControl component="fieldset" sx={{ mt: 2 }}>
+                <FormLabel component="legend" sx={{ color: "#fff" }}>
+                  National Park Fee
+                </FormLabel>
+                <RadioGroup
+                  row
+                  name="parkFee"
+                  value={form.parkFee}
+                  onChange={e => {
+                    const value = e.target.value;
+                    setForm(prev => ({
+                      ...prev,
+                      parkFee: value,
+                      cashTours: value === 'none' ? 'None' : 'National Park Fee',
+                    }));
+                  }}
+                >
+                  <FormControlLabel
+                    value="none"
+                    control={<Radio sx={{ color: "#fff" }} />}
+                    label="None"
+                  />
+                  <FormControlLabel
+                    value="fee"
+                    control={<Radio sx={{ color: "#fff" }} />}
+                    label="National Park Fee"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Grid>
             <Grid item xs={12} md={4}>
               <TextField
@@ -357,30 +387,6 @@ export default function Home() {
               >
                 + Add Pax
               </Button>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend" sx={{ color: "#fff" }}>
-                  National Park Fee
-                </FormLabel>
-                <RadioGroup
-                  row
-                  name="parkFee"
-                  value={form.parkFee}
-                  onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value="none"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label="None"
-                  />
-                  <FormControlLabel
-                    value="fee"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label="National Park Fee"
-                  />
-                </RadioGroup>
-              </FormControl>
             </Grid>
             <Grid item xs={12} sx={{ display: "flex", gap: 2 }}>
               <Button type="submit" variant="contained" color="primary">
