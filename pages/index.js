@@ -19,6 +19,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import AddIcon from "@mui/icons-material/Add";
 import dayjs from "dayjs";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
 
 export default function Home() {
   const [form, setForm] = useState({
@@ -39,6 +41,10 @@ export default function Home() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePhoneChange = (value) => {
+    setForm((prev) => ({ ...prev, phoneNumber: value }));
   };
 
   const handleDateChange = (date) => {
@@ -167,16 +173,33 @@ export default function Home() {
               />
             </Grid>
             <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="phoneNumber :"
-                name="phoneNumber"
+              <PhoneInput
+                country={"th"}
                 value={form.phoneNumber}
-                onChange={handleChange}
-                variant="outlined"
-                InputProps={{ style: { color: "#fff" } }}
-                InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d" }}
+                onChange={handlePhoneChange}
+                inputStyle={{
+                  width: "100%",
+                  background: "#322b4d",
+                  color: "#fff",
+                  border: "1px solid #6c63a7",
+                  borderRadius: 4,
+                  height: 56,
+                  fontSize: 16,
+                }}
+                buttonStyle={{
+                  background: "#322b4d",
+                  border: "none",
+                }}
+                dropdownStyle={{
+                  background: "#322b4d",
+                  color: "#000",
+                }}
+                specialLabel="phoneNumber :"
+                inputProps={{
+                  name: "phoneNumber",
+                  required: false,
+                  autoFocus: false,
+                }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
