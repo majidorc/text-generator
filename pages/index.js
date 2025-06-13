@@ -21,6 +21,8 @@ import AddIcon from "@mui/icons-material/Add";
 import dayjs from "dayjs";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MenuItem from "@mui/material/MenuItem";
 
 export default function Home() {
   const [form, setForm] = useState({
@@ -37,6 +39,7 @@ export default function Home() {
   });
   const [showConfirm, setShowConfirm] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: "" });
+  const [paxRows, setPaxRows] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,6 +95,28 @@ export default function Home() {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(confirmationText);
     setSnackbar({ open: true, message: "Copied to clipboard!" });
+  };
+
+  const handleAddPax = () => {
+    const types = paxRows.map((row) => row.type);
+    if (!types.includes("child")) {
+      setPaxRows([...paxRows, { type: "child", count: 1 }]);
+    } else if (!types.includes("infant")) {
+      setPaxRows([...paxRows, { type: "infant", count: 1 }]);
+    }
+  };
+
+  const handlePaxTypeChange = (idx, value) => {
+    if (paxRows.some((row, i) => row.type === value && i !== idx)) return;
+    setPaxRows((prev) => prev.map((row, i) => (i === idx ? { ...row, type: value } : row)));
+  };
+
+  const handlePaxCountChange = (idx, value) => {
+    setPaxRows((prev) => prev.map((row, i) => (i === idx ? { ...row, count: value } : row)));
+  };
+
+  const handleRemovePax = (idx) => {
+    setPaxRows((prev) => prev.filter((_, i) => i !== idx));
   };
 
   return (
@@ -270,6 +295,55 @@ export default function Home() {
                 sx={{ bgcolor: "#322b4d" }}
               />
             </Grid>
+            <Grid item xs={12} md={4}>
+              {paxRows.map((row, idx) => (
+                <Grid container spacing={2} key={idx} sx={{ mb: 1, width: '100%', ml: 0 }}>
+                  <Grid item xs={5} md={2.5}>
+                    <TextField
+                      fullWidth
+                      type="number"
+                      value={row.count}
+                      onChange={e => handlePaxCountChange(idx, e.target.value)}
+                      variant="outlined"
+                      InputProps={{ style: { color: "#fff" } }}
+                      sx={{ bgcolor: "#322b4d" }}
+                    />
+                  </Grid>
+                  <Grid item xs={5} md={2.5}>
+                    <TextField
+                      select
+                      fullWidth
+                      value={row.type}
+                      onChange={e => handlePaxTypeChange(idx, e.target.value)}
+                      variant="outlined"
+                      InputProps={{ style: { color: "#fff" } }}
+                      sx={{ bgcolor: "#322b4d" }}
+                    >
+                      <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
+                        child
+                      </MenuItem>
+                      <MenuItem value="infant" disabled={paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
+                        infant
+                      </MenuItem>
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={2} md={1} sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8' }}>
+                      <DeleteIcon />
+                    </Button>
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="text"
+                sx={{ color: "#a084e8", ml: 1 }}
+                onClick={handleAddPax}
+              >
+                + Add Pax
+              </Button>
+            </Grid>
             <Grid item xs={12} md={6}>
               <FormControl component="fieldset">
                 <FormLabel component="legend" sx={{ color: "#fff" }}>
@@ -293,15 +367,6 @@ export default function Home() {
                   />
                 </RadioGroup>
               </FormControl>
-            </Grid>
-            <Grid item xs={12} md={6} sx={{ display: "flex", alignItems: "center" }}>
-              <Button
-                variant="outlined"
-                startIcon={<AddIcon />}
-                sx={{ color: "#a084e8", borderColor: "#a084e8", ml: 2 }}
-              >
-                Add Pax +
-              </Button>
             </Grid>
             <Grid item xs={12} sx={{ display: "flex", gap: 2 }}>
               <Button type="submit" variant="contained" color="primary">
