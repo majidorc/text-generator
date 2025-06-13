@@ -11,6 +11,8 @@ import {
   RadioGroup,
   TextField,
   Typography,
+  Paper,
+  Snackbar,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -31,6 +33,8 @@ export default function Home() {
     adult: 1,
     parkFee: "none",
   });
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [snackbar, setSnackbar] = useState({ open: false, message: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +47,7 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form submitted!\n" + JSON.stringify(form, null, 2));
+    setShowConfirm(true);
   };
 
   const handleClear = () => {
@@ -59,6 +63,14 @@ export default function Home() {
       adult: 1,
       parkFee: "none",
     });
+    setShowConfirm(false);
+  };
+
+  const confirmationText = `Please confirm  for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\nPax : ${form.adult} adult\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}`;
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(confirmationText);
+    setSnackbar({ open: true, message: "Copied to clipboard!" });
   };
 
   return (
@@ -144,8 +156,7 @@ export default function Home() {
             <Grid item xs={12} md={4}>
               <TextField
                 fullWidth
-                required
-                label="Hotel :*"
+                label="Hotel :"
                 name="hotel"
                 value={form.hotel}
                 onChange={handleChange}
@@ -264,6 +275,39 @@ export default function Home() {
             </Grid>
           </Grid>
         </Box>
+
+        {showConfirm && (
+          <Paper
+            elevation={3}
+            sx={{
+              mt: 6,
+              p: 3,
+              bgcolor: "#262344",
+              color: "#fff",
+              borderRadius: 2,
+              border: "1px solid #888",
+            }}
+          >
+            <Typography sx={{ mb: 2, fontWeight: 500 }}>
+              Please confirm  for this booking:
+            </Typography>
+            <pre style={{ color: "#fff", fontFamily: "inherit", fontSize: 16 }}>
+              {confirmationText}
+            </pre>
+            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+              <Button variant="contained" color="secondary" onClick={handleCopy}>
+                Copy
+              </Button>
+            </Box>
+          </Paper>
+        )}
+
+        <Snackbar
+          open={snackbar.open}
+          autoHideDuration={2000}
+          onClose={() => setSnackbar({ open: false, message: "" })}
+          message={snackbar.message}
+        />
       </Container>
     </Box>
   );
