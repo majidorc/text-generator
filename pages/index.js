@@ -306,46 +306,49 @@ export default function Home() {
                 sx={{ bgcolor: "#322b4d" }}
               />
             </Grid>
-            <Grid item xs={12} md={4}>
-              {paxRows.map((row, idx) => (
-                <Grid container spacing={2} key={idx} sx={{ mb: 1, width: '100%', ml: 0 }}>
-                  <Grid item xs={5} md={2.5}>
-                    <TextField
-                      fullWidth
-                      type="number"
-                      value={row.count}
-                      onChange={e => handlePaxCountChange(idx, e.target.value)}
-                      variant="outlined"
-                      InputProps={{ style: { color: "#fff" } }}
-                      sx={{ bgcolor: "#322b4d" }}
-                    />
+            {/* PAX rows styled like Adult field, in a single row if possible */}
+            {paxRows.length > 0 && (
+              <Grid item xs={12} md={8} container spacing={2} alignItems="center">
+                {paxRows.map((row, idx) => (
+                  <Grid item xs={12} md={6} key={idx} container spacing={1} alignItems="center">
+                    <Grid item xs={5}>
+                      <TextField
+                        fullWidth
+                        type="number"
+                        value={row.count}
+                        onChange={e => handlePaxCountChange(idx, e.target.value)}
+                        variant="outlined"
+                        InputProps={{ style: { color: "#fff" } }}
+                        sx={{ bgcolor: "#322b4d" }}
+                      />
+                    </Grid>
+                    <Grid item xs={5}>
+                      <TextField
+                        select
+                        fullWidth
+                        value={row.type}
+                        onChange={e => handlePaxTypeChange(idx, e.target.value)}
+                        variant="outlined"
+                        InputProps={{ style: { color: "#fff" } }}
+                        sx={{ bgcolor: "#322b4d" }}
+                      >
+                        <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
+                          child
+                        </MenuItem>
+                        <MenuItem value="infant" disabled={paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
+                          infant
+                        </MenuItem>
+                      </TextField>
+                    </Grid>
+                    <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8' }}>
+                        <DeleteIcon />
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={5} md={2.5}>
-                    <TextField
-                      select
-                      fullWidth
-                      value={row.type}
-                      onChange={e => handlePaxTypeChange(idx, e.target.value)}
-                      variant="outlined"
-                      InputProps={{ style: { color: "#fff" } }}
-                      sx={{ bgcolor: "#322b4d" }}
-                    >
-                      <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
-                        child
-                      </MenuItem>
-                      <MenuItem value="infant" disabled={paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
-                        infant
-                      </MenuItem>
-                    </TextField>
-                  </Grid>
-                  <Grid item xs={2} md={1} sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8' }}>
-                      <DeleteIcon />
-                    </Button>
-                  </Grid>
-                </Grid>
-              ))}
-            </Grid>
+                ))}
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Button
                 variant="text"
