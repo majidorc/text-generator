@@ -87,10 +87,21 @@ export default function Home() {
     setShowConfirm(false);
   };
 
+  // Compose Pax line for confirmation text
+  let paxLine = `Pax : ${form.adult} adult`;
+  if (paxRows.length > 0) {
+    const childRow = paxRows.find(row => row.type === 'child');
+    const infantRow = paxRows.find(row => row.type === 'infant');
+    const parts = [`${form.adult} adult`];
+    if (childRow) parts.push(`${childRow.count} child`);
+    if (infantRow) parts.push(`${infantRow.count} infant`);
+    paxLine = `Pax : ${parts.join(', ')}`;
+  }
+
   const confirmationText =
     form.addressOption === "without"
-      ? `Please confirm the for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\nPax : ${form.adult} adult\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}`
-      : `Please confirm the *pickup time* for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\nPax : ${form.adult} adult\nHotel : ${form.hotel}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}\n\nPlease mentioned if there is any additional charge for transfer collect from customer`;
+      ? `Please confirm the for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\n${paxLine}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}`
+      : `Please confirm the *pickup time* for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\n${paxLine}\nHotel : ${form.hotel}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}\n\nPlease mentioned if there is any additional charge for transfer collect from customer`;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(confirmationText);
