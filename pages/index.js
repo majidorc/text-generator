@@ -225,30 +225,25 @@ export default function Home() {
                 InputLabelProps={{ style: { color: "#fff" } }}
                 sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
-              <FormControl component="fieldset" sx={{ mt: 2 }}>
-                <FormLabel component="legend" sx={{ color: "#fff", fontWeight: 500 }}>
-                  Address Option
-                </FormLabel>
-                <RadioGroup
-                  row
-                  name="addressOption"
-                  value={form.addressOption}
-                  onChange={handleChange}
-                  sx={{ mt: 1 }}
-                >
-                  <FormControlLabel
-                    value="without"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label={<span style={{ fontWeight: 400 }}>Without Address</span>}
-                    sx={{ mr: 3 }}
-                  />
-                  <FormControlLabel
-                    value="sendLater"
-                    control={<Radio sx={{ color: "#fff" }} />}
-                    label={<span style={{ fontWeight: 400 }}>Send Later</span>}
-                  />
-                </RadioGroup>
-              </FormControl>
+              <RadioGroup
+                row
+                name="addressOption"
+                value={form.addressOption}
+                onChange={handleChange}
+                sx={{ mt: 2 }}
+              >
+                <FormControlLabel
+                  value="without"
+                  control={<Radio sx={{ color: "#fff" }} />}
+                  label={<span style={{ fontWeight: 400 }}>Without Address</span>}
+                  sx={{ mr: 3 }}
+                />
+                <FormControlLabel
+                  value="sendLater"
+                  control={<Radio sx={{ color: "#fff" }} />}
+                  label={<span style={{ fontWeight: 400 }}>Send Later</span>}
+                />
+              </RadioGroup>
             </Grid>
             <Grid item xs={12} md={4}>
               {/* Phone number label for consistent style, less gap */}
