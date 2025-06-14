@@ -24,7 +24,8 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
         </div>
         <footer style={{ textAlign: 'center', padding: '16px 0', background: '#231f3a', color: '#fff', fontSize: 16 }}>
-          &lt;3 <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
+          <span role="img" aria-label="love" style={{ fontSize: 18, verticalAlign: 'middle', marginRight: 4 }}>❤️</span>
+          <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
         </footer>
       </div>
     </ThemeProvider>
