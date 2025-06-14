@@ -232,7 +232,7 @@ export default function OperatorForm() {
                 <FormControlLabel
                   value="without"
                   control={<Radio sx={{ color: "#fff" }} />}
-                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>Without Address</span>}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>No Transfer</span>}
                   sx={{ mr: 3 }}
                 />
                 <FormControlLabel
