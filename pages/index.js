@@ -243,13 +243,13 @@ export default function Home() {
                 <FormControlLabel
                   value="without"
                   control={<Radio sx={{ color: "#fff" }} />}
-                  label={<span style={{ fontWeight: 400 }}>Without Address</span>}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>Without Address</span>}
                   sx={{ mr: 3 }}
                 />
                 <FormControlLabel
                   value="sendLater"
                   control={<Radio sx={{ color: "#fff" }} />}
-                  label={<span style={{ fontWeight: 400 }}>Send Later</span>}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>Send Later</span>}
                 />
               </RadioGroup>
             </Grid>
@@ -384,13 +384,13 @@ export default function Home() {
                 <FormControlLabel
                   value="none"
                   control={<Radio sx={{ color: "#fff" }} />}
-                  label={<span style={{ fontWeight: 400 }}>None</span>}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>None</span>}
                   sx={{ mr: 3 }}
                 />
                 <FormControlLabel
                   value="fee"
                   control={<Radio sx={{ color: "#fff" }} />}
-                  label={<span style={{ fontWeight: 400 }}>National Park Fee</span>}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>National Park Fee</span>}
                 />
               </RadioGroup>
             </Grid>
