@@ -19,17 +19,22 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import AddIcon from "@mui/icons-material/Add";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MenuItem from "@mui/material/MenuItem";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default function Home() {
   const [form, setForm] = useState({
     bookingNumber: "",
     program: "",
     name: "",
-    tourDate: dayjs(),
+    tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
     hotel: "",
     phoneNumber: "",
     addressOption: "",
@@ -78,7 +83,7 @@ export default function Home() {
       bookingNumber: "",
       program: "",
       name: "",
-      tourDate: dayjs(),
+      tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
       hotel: "",
       phoneNumber: "",
       addressOption: "",
