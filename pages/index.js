@@ -416,7 +416,7 @@ export default function Home() {
             <Typography sx={{ mb: 2, fontWeight: 500 }}>
               Please confirm  for this booking:
             </Typography>
-            <pre style={{ color: "#fff", fontFamily: "inherit", fontSize: 16 }}>
+            <pre style={{ color: "#fff", fontFamily: "inherit", fontSize: 16, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
               {confirmationText}
             </pre>
             <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
