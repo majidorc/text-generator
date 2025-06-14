@@ -34,7 +34,7 @@ This project is a modern, responsive operator form built with Next.js and Materi
 
 - **No backend needed**: All logic is in the frontend.
 - **Modern stack**: Next.js + MUI = fast, beautiful, and production-ready.
-- **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant (YOU!).
+- **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant (this application I use).
 - **Copy-paste ready**: You can adapt this for any operator, agency, or booking workflow.
 
 ---
