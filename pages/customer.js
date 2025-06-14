@@ -103,7 +103,7 @@ export default function Customer() {
         <Typography variant="h6" align="center" sx={{ fontWeight: 600, mb: 2 }}>
           Customer Form Without Fee
         </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={4}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
@@ -188,41 +188,28 @@ export default function Customer() {
               />
             </Grid>
           )}
-          <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-            <FormControlLabel
-              control={<Checkbox checked={form.sendNow} onChange={handleChange} name="sendNow" sx={{ color: "#fff" }} />}
-              label="Send Now:"
-              sx={{ color: "#fff" }}
-            />
-          </Grid>
-          {!showFeeFields && (
-            <>
-              <Grid item xs={12} md={2}>
-                <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={() => handleSubmit(false)}>
+          <Grid item xs={12} mt={2} display="flex" justifyContent="center" gap={2}>
+            {!showFeeFields && (
+              <>
+                <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={() => handleSubmit(false)}>
                   Send Mail
                 </Button>
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={handleToggleFee}>
+                <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
                   With Fee
                 </Button>
-              </Grid>
-            </>
-          )}
-          {showFeeFields && (
-            <>
-              <Grid item xs={12} md={2}>
-                <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={handleWithFeeConfirm}>
+              </>
+            )}
+            {showFeeFields && (
+              <>
+                <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleWithFeeConfirm}>
                   Send Mail
                 </Button>
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={handleToggleFee}>
+                <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
                   Without Fee
                 </Button>
-              </Grid>
-            </>
-          )}
+              </>
+            )}
+          </Grid>
         </Grid>
       </Paper>
       {showConfirm && (
