@@ -137,10 +137,10 @@ export default function Home() {
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            mt: 4,
-            p: { xs: 2, md: 4 },
-            borderRadius: 2,
-            bgcolor: "#29224a",
+            mt: 0,
+            p: 0,
+            borderRadius: 0,
+            bgcolor: "transparent",
             boxShadow: "none",
             maxWidth: 1100,
             mx: "auto",
@@ -149,7 +149,7 @@ export default function Home() {
           <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
             Operator Form
           </Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={0}>
             {/* Top fields */}
             <Grid item xs={12} md={4}>
               <TextField
@@ -160,9 +160,8 @@ export default function Home() {
                 value={form.bookingNumber}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -174,9 +173,8 @@ export default function Home() {
                 value={form.program}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -188,9 +186,8 @@ export default function Home() {
                 value={form.name}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -205,9 +202,8 @@ export default function Home() {
                       fullWidth
                       required
                       variant="outlined"
-                      InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                      InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                       InputLabelProps={{ style: { color: "#fff" } }}
-                      sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
                     />
                   )}
                 />
@@ -221,9 +217,8 @@ export default function Home() {
                 value={form.hotel}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
               <RadioGroup
                 row
@@ -259,7 +254,7 @@ export default function Home() {
                   background: "#322b4d",
                   color: "#fff",
                   border: "1px solid #6c63a7",
-                  borderRadius: 8,
+                  borderRadius: 0,
                   height: 48,
                   fontSize: 16,
                 }}
@@ -290,9 +285,8 @@ export default function Home() {
                 value={form.adult}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
             </Grid>
             {paxRows.length > 0 && (
@@ -306,8 +300,8 @@ export default function Home() {
                         value={row.count}
                         onChange={e => handlePaxCountChange(idx, e.target.value)}
                         variant="outlined"
-                        InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
-                        sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
+                        InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
+                        sx={{ bgcolor: "#322b4d", borderRadius: 0 }}
                       />
                     </Grid>
                     <Grid item xs={5}>
@@ -317,8 +311,8 @@ export default function Home() {
                         value={row.type}
                         onChange={e => handlePaxTypeChange(idx, e.target.value)}
                         variant="outlined"
-                        InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
-                        sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
+                        InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
+                        sx={{ bgcolor: "#322b4d", borderRadius: 0 }}
                       >
                         <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
                           child
@@ -356,9 +350,8 @@ export default function Home() {
                 value={form.cashTours}
                 onChange={handleChange}
                 variant="outlined"
-                InputProps={{ style: { color: "#fff", borderRadius: 8, height: 48 } }}
+                InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
-                sx={{ bgcolor: "#322b4d", borderRadius: 2 }}
               />
               <RadioGroup
                 row
