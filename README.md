@@ -1,5 +1,3 @@
-# Operator Form & Customer Page (Next.js + MUI)
-
 This project is a modern, responsive web app built with Next.js and Material-UI (MUI). It is designed for tour operators or travel agencies (like [tours.co.th](https://tours.co.th)) to quickly collect and confirm booking details in a beautiful, user-friendly way.
 
 **Live Demo:** [text.tours.co.th](https://text.tours.co.th)
