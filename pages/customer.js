@@ -84,7 +84,7 @@ export default function Customer() {
 
   const confirmationText = (fee) => {
     const pickUpText = form.exTransfer
-      ? `Pick up: ${form.pickUp} ( extra charge for private transfer 1000THB )`
+      ? `Pick up: ${form.pickUp} ( extra charge for private transfer ${form.exTransfer}THB )`
       : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
@@ -156,6 +156,8 @@ export default function Customer() {
               onChange={handleChange}
               variant="outlined"
               sx={{ bgcolor: "#2d2746" }}
+              type="number"
+              inputProps={{ min: 0 }}
             />
           </Grid>
           <Grid item xs={12} md={3}>
