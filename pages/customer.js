@@ -104,7 +104,7 @@ export default function Customer() {
           Customer Form Without Fee
         </Typography>
         <Grid container spacing={2} alignItems="center" justifyContent="center">
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={3}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="tour Date :"
@@ -116,7 +116,7 @@ export default function Customer() {
               />
             </LocalizationProvider>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={3}>
             <TextField
               fullWidth
               label="Name :*"
@@ -127,7 +127,7 @@ export default function Customer() {
               sx={{ bgcolor: "#2d2746" }}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={3}>
             <TextField
               fullWidth
               label="Pick up :"
@@ -138,7 +138,7 @@ export default function Customer() {
               sx={{ bgcolor: "#2d2746" }}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={3}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 label="Pickup time from:"
@@ -150,7 +150,7 @@ export default function Customer() {
               />
             </LocalizationProvider>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={3}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 label="Pickup time to:"
@@ -163,7 +163,7 @@ export default function Customer() {
             </LocalizationProvider>
           </Grid>
           {showFeeFields && (
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={3}>
               <TextField
                 fullWidth
                 label="FEE Child :"
@@ -176,7 +176,7 @@ export default function Customer() {
             </Grid>
           )}
           {showFeeFields && (
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={3}>
               <TextField
                 fullWidth
                 label="FEE Adult :"
