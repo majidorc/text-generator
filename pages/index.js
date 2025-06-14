@@ -358,7 +358,7 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label={<span style={{ fontWeight: 500 }}>Cash Tours :*</span>}
+                label={<span style={{ fontWeight: 500 }}>Cash on Tour :*</span>}
                 name="cashTours"
                 value={form.cashTours}
                 onChange={handleChange}
