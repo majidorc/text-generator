@@ -1,5 +1,3 @@
-[tours.co.th](https://tours.co.th)
-
 # Operator Form (Next.js + MUI)
 
 This project is a modern, responsive operator form built with Next.js and Material-UI (MUI). It is designed for tour operators or travel agencies (like [tours.co.th](https://tours.co.th)) to quickly collect and confirm booking details in a beautiful, user-friendly way.
