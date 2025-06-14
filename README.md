@@ -39,4 +39,8 @@ This project is a modern, responsive operator form built with Next.js and Materi
 
 ---
 
-**Enjoy your new operator form! If you want to add more features or change the style, just ask ME (the AI) and it's done!** 
+**Enjoy your new operator form! If you want to add more features or change the style, just ask me (through this application I use) and it's done!**
+
+---
+
+Thank you to [tours.co.th](https://tours.co.th)! 
