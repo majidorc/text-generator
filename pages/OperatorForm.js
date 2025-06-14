@@ -158,9 +158,6 @@ export default function OperatorForm() {
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 3, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
-        <Typography variant="h6" align="center" sx={{ fontWeight: 600, mb: 2 }}>
-          Operator Form
-        </Typography>
         <Box component="form" onSubmit={handleSubmit} autoComplete="off">
           <Grid container spacing={2} alignItems="center" justifyContent="center">
             <Grid item xs={12} md={3}>
