@@ -137,9 +137,9 @@ export default function Home() {
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            mt: 0,
-            p: 0,
-            borderRadius: 0,
+            mt: 4,
+            p: { xs: 2, md: 4 },
+            borderRadius: 4,
             bgcolor: "transparent",
             boxShadow: "none",
             maxWidth: 1100,
@@ -149,7 +149,7 @@ export default function Home() {
           <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
             Operator Form
           </Typography>
-          <Grid container spacing={0}>
+          <Grid container spacing={2}>
             {/* Top fields */}
             <Grid item xs={12} md={4}>
               <TextField
@@ -241,10 +241,6 @@ export default function Home() {
               </RadioGroup>
             </Grid>
             <Grid item xs={12} md={4}>
-              {/* Phone number label for consistent style, less gap */}
-              <Typography sx={{ color: '#fff', fontWeight: 500, mb: 0.5, fontSize: 16 }}>
-                phoneNumber :
-              </Typography>
               <PhoneInput
                 country={"th"}
                 value={form.phoneNumber}
@@ -254,7 +250,7 @@ export default function Home() {
                   background: "#322b4d",
                   color: "#fff",
                   border: "1px solid #6c63a7",
-                  borderRadius: 0,
+                  borderRadius: 8,
                   height: 48,
                   fontSize: 16,
                 }}
