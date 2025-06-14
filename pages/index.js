@@ -159,7 +159,7 @@ export default function Home() {
           </Typography>
           <Grid container spacing={2}>
             {/* Top fields */}
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 required
@@ -173,7 +173,7 @@ export default function Home() {
                 autoComplete="off"
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 required
@@ -187,7 +187,7 @@ export default function Home() {
                 autoComplete="off"
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 required
@@ -201,7 +201,7 @@ export default function Home() {
                 autoComplete="off"
               />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label={<span style={{ fontWeight: 500 }}>Tour Date :*</span>}
@@ -221,7 +221,7 @@ export default function Home() {
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 label={<span style={{ fontWeight: 500 }}>Hotel :</span>}
@@ -253,7 +253,7 @@ export default function Home() {
                 />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <PhoneInput
                 country={"th"}
                 value={form.phoneNumber}
@@ -285,7 +285,7 @@ export default function Home() {
               />
             </Grid>
             {/* Adult and PAX fields */}
-            <Grid item xs={12} md={4} sx={{ mt: 2 }}>
+            <Grid item xs={12} md={6} sx={{ mt: 2 }}>
               <TextField
                 fullWidth
                 required
@@ -301,7 +301,7 @@ export default function Home() {
               />
             </Grid>
             {paxRows.length > 0 && (
-              <Grid item xs={12} md={8} container spacing={2} alignItems="center" sx={{ mt: 2 }}>
+              <Grid item xs={12} md={6} container spacing={2} alignItems="center" sx={{ mt: 2 }}>
                 {paxRows.map((row, idx) => (
                   <Grid item xs={12} md={6} key={idx} container spacing={1} alignItems="center">
                     <Grid item xs={5}>
@@ -344,7 +344,7 @@ export default function Home() {
                 ))}
               </Grid>
             )}
-            <Grid item xs={12}>
+            <Grid item xs={12} md={6}>
               <Button
                 variant="text"
                 sx={{ color: "#a084e8", ml: 1, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, transition: 'color 0.2s', '&:hover': { color: '#fff' } }}
@@ -354,7 +354,7 @@ export default function Home() {
               </Button>
             </Grid>
             {/* Cash Tours and National Park Fee fields follow */}
-            <Grid item xs={12} md={4} sx={{ mt: 2 }}>
+            <Grid item xs={12} md={6} sx={{ mt: 2 }}>
               <TextField
                 fullWidth
                 required
