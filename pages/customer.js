@@ -221,7 +221,7 @@ export default function Customer() {
             {!showFeeFields && (
               <>
                 <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={() => handleSubmit(false)}>
-                  Send Mail
+                  OK / Copy
                 </Button>
                 <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
                   With Fee
@@ -231,7 +231,7 @@ export default function Customer() {
             {showFeeFields && (
               <>
                 <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleWithFeeConfirm}>
-                  Send Mail
+                  OK / Copy
                 </Button>
                 <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
                   Without Fee

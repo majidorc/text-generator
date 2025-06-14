@@ -397,7 +397,7 @@ export default function OperatorForm() {
             {/* Buttons */}
             <Grid item xs={12} sx={{ display: "flex", gap: 2, mt: 4 }}>
               <Button type="submit" variant="contained" sx={{ bgcolor: "#7ecbff", color: '#222', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#4fa3d1' } }}>
-                SUBMIT
+                OK / Copy
               </Button>
               <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
                 CLEAR
