@@ -26,8 +26,6 @@ function Layout({ children, pageTitle }) {
   const router = useRouter();
   const menu = [
     { text: "Forms", href: "/forms" },
-    { text: "Operator Form", href: "/" },
-    { text: "Customer", href: "/customer" },
   ];
   return (
     <Box sx={{ display: "flex" }}>
