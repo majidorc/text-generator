@@ -26,6 +26,7 @@ export default function Customer() {
     tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day').startOf('day'),
     name: "",
     pickUp: "",
+    exTransfer: "",
     pickupFrom: dayjs().hour(8).minute(0),
     pickupTo: dayjs().hour(9).minute(0),
     sendNow: false,
@@ -82,13 +83,16 @@ export default function Customer() {
   };
 
   const confirmationText = (fee) => {
+    const pickUpText = form.exTransfer
+      ? `Pick up: ${form.pickUp} ( extra charge for private transfer 1000THB )`
+      : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
         `Hello ,\n\n` +
         `Warm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\n` +
         `We are pleased to confirm your booking, as detailed below.\n\n` +
         `Tour date:  ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY").replace(/(\d{2}) (\w{3}) (\d{4})/, (m, d, mon, y) => `${parseInt(d)} ${mon} ${y}`) : ""}\n` +
-        `Pick up: ${form.pickUp}\n` +
+        `${pickUpText}\n` +
         `Pickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}\n\n` +
         `**Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible, please just call us if driver be later more than 10 mins**\n\n` +
         `The national park fee of THB ${form.feeAdult} per adult and THB ${form.feeChild} per child is excluded from the tour price. Please prepare cash for this fee. This fee is a maintenance fee collected by the Thai government department. There is no exception.\n\n` +
@@ -97,7 +101,7 @@ export default function Customer() {
         `Best Regards,\nThailand Tours team`
       );
     }
-    let text = `Hello ${form.name} ,\n\nWarm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nPick up: ${form.pickUp}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
+    let text = `Hello ${form.name} ,\n\nWarm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\n${pickUpText}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
     text += `\n\n** Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible , please just call us if driver be later more than 10 mins**\n\nShould you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\nWe wish you a great day and a fantastic trip!\n\nBest Regards,\nThailand Tours team`;
     return text;
   };
@@ -138,6 +142,17 @@ export default function Customer() {
               label="Pick up :"
               name="pickUp"
               value={form.pickUp}
+              onChange={handleChange}
+              variant="outlined"
+              sx={{ bgcolor: "#2d2746" }}
+            />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <TextField
+              fullWidth
+              label="Ex/Transfer"
+              name="exTransfer"
+              value={form.exTransfer}
               onChange={handleChange}
               variant="outlined"
               sx={{ bgcolor: "#2d2746" }}
