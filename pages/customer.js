@@ -168,30 +168,30 @@ export default function Customer() {
             </LocalizationProvider>
           </Grid>
           {showFeeFields && (
-            <Grid item xs={12} md={3}>
-              <TextField
-                fullWidth
-                label="FEE Child :"
-                name="feeChild"
-                value={form.feeChild}
-                onChange={handleChange}
-                variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
-              />
-            </Grid>
-          )}
-          {showFeeFields && (
-            <Grid item xs={12} md={3}>
-              <TextField
-                fullWidth
-                label="FEE Adult :"
-                name="feeAdult"
-                value={form.feeAdult}
-                onChange={handleChange}
-                variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
-              />
-            </Grid>
+            <>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  fullWidth
+                  label="FEE Child :"
+                  name="feeChild"
+                  value={form.feeChild}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={{ bgcolor: "#2d2746" }}
+                />
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  fullWidth
+                  label="FEE Adult :"
+                  name="feeAdult"
+                  value={form.feeAdult}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={{ bgcolor: "#2d2746" }}
+                />
+              </Grid>
+            </>
           )}
           <Grid item xs={12} mt={2} display="flex" justifyContent="center" gap={2}>
             {!showFeeFields && (
