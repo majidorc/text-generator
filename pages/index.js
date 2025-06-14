@@ -69,6 +69,8 @@ export default function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowConfirm(true);
+    navigator.clipboard.writeText(confirmationText);
+    setSnackbar({ open: true, message: "Copied to clipboard!" });
   };
 
   const handleClear = () => {
