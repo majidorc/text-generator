@@ -163,7 +163,7 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label={<span style={{ fontWeight: 500 }}>Booking Number :*</span>}
+                label="Booking Number"
                 name="bookingNumber"
                 value={form.bookingNumber}
                 onChange={handleChange}
@@ -177,7 +177,7 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label={<span style={{ fontWeight: 500 }}>Program :*</span>}
+                label="Program"
                 name="program"
                 value={form.program}
                 onChange={handleChange}
@@ -191,7 +191,7 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label={<span style={{ fontWeight: 500 }}>Name :*</span>}
+                label="Name"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
@@ -204,7 +204,7 @@ export default function Home() {
             <Grid item xs={12} md={6}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label={<span style={{ fontWeight: 500 }}>Tour Date :*</span>}
+                  label="Tour Date"
                   value={form.tourDate}
                   onChange={handleDateChange}
                   renderInput={(params) => (
@@ -224,7 +224,7 @@ export default function Home() {
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                label={<span style={{ fontWeight: 500 }}>Hotel :</span>}
+                label="Hotel"
                 name="hotel"
                 value={form.hotel}
                 onChange={handleChange}
@@ -289,7 +289,7 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label={<span style={{ fontWeight: 500 }}>Adult :*</span>}
+                label="Adult"
                 name="adult"
                 type="number"
                 value={form.adult}
@@ -358,7 +358,7 @@ export default function Home() {
               <TextField
                 fullWidth
                 required
-                label={<span style={{ fontWeight: 500 }}>Cash on Tour :*</span>}
+                label="Cash on Tour"
                 name="cashTours"
                 value={form.cashTours}
                 onChange={handleChange}
