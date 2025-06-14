@@ -2,6 +2,8 @@
 
 This project is a modern, responsive web app built with Next.js and Material-UI (MUI). It is designed for tour operators or travel agencies (like [tours.co.th](https://tours.co.th)) to quickly collect and confirm booking details in a beautiful, user-friendly way.
 
+**Live Demo:** [text.tours.co.th](https://text.tours.co.th)
+
 ## What is this?
 
 - **Operator Form**: A web form for entering booking details: booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit.
@@ -17,6 +19,19 @@ This project is a modern, responsive web app built with Next.js and Material-UI 
 - **Offline support**: The app works offline after the first load, thanks to service worker caching.
 - **Home screen icon**: Custom icon and splash screen for a professional look.
 - **Fast loading**: Instant startup from your device, even without a network connection.
+
+## PWA Install Prompt Troubleshooting
+
+If you do not see the install prompt:
+- Make sure you are visiting the site over HTTPS (the live link above is correct).
+- Use a supported browser (Chrome, Edge, Safari on iOS, etc.).
+- You must visit the site at least once and interact with it.
+- The prompt will not show if the app is already installed, or if you dismissed it recently.
+- On desktop, look for a small install icon in the address bar. On mobile, use the browser menu and select "Add to Home Screen."
+- The app must not be in incognito/private mode or inside an iframe.
+
+**Custom Install Button:**
+If you want a visible install button in the app, you can add a custom install button that appears when the browser allows. Just ask in an issue or request it through this application I use!
 
 ## How to use it (It's super easy!)
 
