@@ -38,6 +38,15 @@ export default function Customer() {
   const [showFeeFields, setShowFeeFields] = useState(false);
   const [withFee, setWithFee] = useState(false);
 
+  // Update confirmation text instantly if box is open and fee mode/values change
+  React.useEffect(() => {
+    if (showConfirm) {
+      // Copy updated confirmation text to clipboard
+      navigator.clipboard.writeText(confirmationText(withFee));
+    }
+    // eslint-disable-next-line
+  }, [withFee, form.feeAdult, form.feeChild, form.exTransfer, form.pickUp, form.tourDate, form.pickupFrom, form.pickupTo, form.name]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
@@ -56,11 +65,9 @@ export default function Customer() {
   const handleSubmit = (fee) => {
     setWithFee(fee);
     setShowFeeFields(fee);
-    if (!fee) {
-      setShowConfirm(true);
-      navigator.clipboard.writeText(confirmationText(false));
-      setSnackbar({ open: true, message: "Copied to clipboard!" });
-    }
+    setShowConfirm(true);
+    navigator.clipboard.writeText(confirmationText(fee));
+    setSnackbar({ open: true, message: "Copied to clipboard!" });
   };
 
   const handleToggleFee = () => {
@@ -73,7 +80,7 @@ export default function Customer() {
         return true;
       }
     });
-    setShowConfirm(false);
+    // Do not reset confirmation box, just update text if open
   };
 
   const handleWithFeeConfirm = () => {
