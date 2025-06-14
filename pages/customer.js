@@ -24,9 +24,13 @@ export default function Customer() {
     pickupFrom: dayjs().hour(8).minute(0),
     pickupTo: dayjs().hour(9).minute(0),
     sendNow: false,
+    feeAdult: "0",
+    feeChild: "0",
   });
   const [showConfirm, setShowConfirm] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: "" });
+  const [showFeeFields, setShowFeeFields] = useState(false);
+  const [withFee, setWithFee] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -43,14 +47,29 @@ export default function Customer() {
     setForm((prev) => ({ ...prev, pickupTo: date }));
   };
 
-  const handleSubmit = (withFee) => {
+  const handleSubmit = (fee) => {
+    setWithFee(fee);
+    setShowFeeFields(fee);
+    if (!fee) {
+      setShowConfirm(true);
+      navigator.clipboard.writeText(confirmationText(false));
+      setSnackbar({ open: true, message: "Copied to clipboard!" });
+    }
+  };
+
+  const handleWithFeeConfirm = () => {
     setShowConfirm(true);
-    navigator.clipboard.writeText(confirmationText(withFee));
+    navigator.clipboard.writeText(confirmationText(true));
     setSnackbar({ open: true, message: "Copied to clipboard!" });
   };
 
-  const confirmationText = (withFee) => {
-    return `Hello ${form.name} ,\n\nWarm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nPick up: ${form.pickUp}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}\n\n** Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible , please just call us if driver be later more than 10 mins**\n\nShould you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\nWe wish you a great day and a fantastic trip!\n\nBest Regards,\nThailand Tours team` + (withFee ? "\n\n[National Park Fee Included]" : "");
+  const confirmationText = (fee) => {
+    let text = `Hello ${form.name} ,\n\nWarm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nPick up: ${form.pickUp}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
+    if (fee) {
+      text += `\nFEE Adult: ${form.feeAdult}\nFEE Child: ${form.feeChild}\n[National Park Fee Included]`;
+    }
+    text += `\n\n** Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible , please just call us if driver be later more than 10 mins**\n\nShould you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\nWe wish you a great day and a fantastic trip!\n\nBest Regards,\nThailand Tours team`;
+    return text;
   };
 
   return (
@@ -75,7 +94,7 @@ export default function Customer() {
           <Grid item xs={12} md={4}>
             <TextField
               fullWidth
-              label="Name :"
+              label="Name :*"
               name="name"
               value={form.name}
               onChange={handleChange}
@@ -118,6 +137,32 @@ export default function Customer() {
               />
             </LocalizationProvider>
           </Grid>
+          {showFeeFields && (
+            <>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  label="FEE Child :"
+                  name="feeChild"
+                  value={form.feeChild}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={{ bgcolor: "#2d2746" }}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  label="FEE Adult :"
+                  name="feeAdult"
+                  value={form.feeAdult}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={{ bgcolor: "#2d2746" }}
+                />
+              </Grid>
+            </>
+          )}
           <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
             <FormControlLabel
               control={<Checkbox checked={form.sendNow} onChange={handleChange} name="sendNow" sx={{ color: "#fff" }} />}
@@ -125,24 +170,35 @@ export default function Customer() {
               sx={{ color: "#fff" }}
             />
           </Grid>
-          <Grid item xs={12} md={2}>
-            <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={() => handleSubmit(false)}>
-              Send Mail
-            </Button>
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={() => handleSubmit(true)}>
-              With Fee
-            </Button>
-          </Grid>
+          {!showFeeFields && (
+            <>
+              <Grid item xs={12} md={2}>
+                <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={() => handleSubmit(false)}>
+                  Send Mail
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={2}>
+                <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={() => handleSubmit(true)}>
+                  With Fee
+                </Button>
+              </Grid>
+            </>
+          )}
+          {showFeeFields && (
+            <Grid item xs={12} md={2}>
+              <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={handleWithFeeConfirm}>
+                Send Mail
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </Paper>
       {showConfirm && (
         <Paper sx={{ p: 3, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
           <pre style={{ color: "#fff", fontFamily: "inherit", fontSize: 16, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-            {confirmationText(form.snackbarWithFee)}
+            {confirmationText(withFee)}
           </pre>
-          <Button variant="contained" sx={{ bgcolor: "#a084e8", mt: 2 }} onClick={() => {navigator.clipboard.writeText(confirmationText(form.snackbarWithFee)); setSnackbar({ open: true, message: "Copied to clipboard!" });}}>
+          <Button variant="contained" sx={{ bgcolor: "#a084e8", mt: 2 }} onClick={() => {navigator.clipboard.writeText(confirmationText(withFee)); setSnackbar({ open: true, message: "Copied to clipboard!" });}}>
             Copy Email
           </Button>
         </Paper>

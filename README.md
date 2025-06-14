@@ -1,12 +1,12 @@
-# Operator Form (Next.js + MUI)
+# Operator Form & Customer Page (Next.js + MUI)
 
-This project is a modern, responsive operator form built with Next.js and Material-UI (MUI). It is designed for tour operators or travel agencies (like [tours.co.th](https://tours.co.th)) to quickly collect and confirm booking details in a beautiful, user-friendly way.
+This project is a modern, responsive web app built with Next.js and Material-UI (MUI). It is designed for tour operators or travel agencies (like [tours.co.th](https://tours.co.th)) to quickly collect and confirm booking details in a beautiful, user-friendly way.
 
 ## What is this?
 
-- A web form for entering booking details: booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee.
-- Instantly generates a confirmation message you can copy/share.
-- Automatically copies the confirmation to your clipboard after submit.
+- **Operator Form**: A web form for entering booking details: booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit.
+- **Customer Page**: A dedicated form for customer booking confirmation. Enter tour date, name, pick up, pickup time (from/to), and optionally FEE Adult/Child fields. Instantly preview and copy a formatted confirmation email. Toggle FEE fields by clicking "With Fee". Designed for quick, accurate customer communication.
+- **Persistent Side Menu**: Easily navigate between Operator Form and Customer pages using the always-visible (desktop) or toggleable (mobile) side menu.
 - Fully responsive and easy to use on any device.
 - Built and iterated **super fast and easily with the help of this AI assistant ([\@cursor](https://github.com/getcursor/cursor))**
 
@@ -36,10 +36,11 @@ This project is a modern, responsive operator form built with Next.js and Materi
 - **Modern stack**: Next.js + MUI = fast, beautiful, and production-ready.
 - **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant ([\@cursor](https://github.com/getcursor/cursor)).
 - **Copy-paste ready**: You can adapt this for any operator, agency, or booking workflow.
+- **Side menu navigation**: Quickly switch between Operator Form and Customer pages.
 
 ---
 
-**Enjoy your new operator form! If you want to add more features or change the style, just ask me (through this application I use) and it's done!**
+**Enjoy your new operator & customer form app! If you want to add more features or change the style, just ask me (through this application I use) and it's done!**
 
 ---
 
