@@ -172,9 +172,9 @@ export default function Customer() {
               <Grid item xs={12} md={3}>
                 <TextField
                   fullWidth
-                  label="FEE Child :"
-                  name="feeChild"
-                  value={form.feeChild}
+                  label="FEE Adult :"
+                  name="feeAdult"
+                  value={form.feeAdult}
                   onChange={handleChange}
                   variant="outlined"
                   sx={{ bgcolor: "#2d2746" }}
@@ -183,9 +183,9 @@ export default function Customer() {
               <Grid item xs={12} md={3}>
                 <TextField
                   fullWidth
-                  label="FEE Adult :"
-                  name="feeAdult"
-                  value={form.feeAdult}
+                  label="FEE Child :"
+                  name="feeChild"
+                  value={form.feeChild}
                   onChange={handleChange}
                   variant="outlined"
                   sx={{ bgcolor: "#2d2746" }}
