@@ -143,233 +143,235 @@ export default function OperatorForm() {
         <Typography variant="h6" align="center" sx={{ fontWeight: 600, mb: 2 }}>
           Operator Form
         </Typography>
-        <Grid container spacing={2} alignItems="center" justifyContent="center">
-          <Grid item xs={12} md={3}>
-            <TextField
-              fullWidth
-              required
-              label="Booking Number"
-              name="bookingNumber"
-              value={form.bookingNumber}
-              onChange={handleChange}
-              variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <TextField
-              fullWidth
-              required
-              label="Program"
-              name="program"
-              value={form.program}
-              onChange={handleChange}
-              variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <TextField
-              fullWidth
-              required
-              label="Name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Tour Date"
-                value={form.tourDate}
-                onChange={handleDateChange}
-                renderInput={(params) => (
-                  <TextField {...params} fullWidth required variant="outlined" sx={{ bgcolor: "#2d2746" }} autoComplete="off" />
-                )}
+        <Box component="form" onSubmit={handleSubmit} autoComplete="off">
+          <Grid container spacing={2} alignItems="center" justifyContent="center">
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                required
+                label="Booking Number"
+                name="bookingNumber"
+                value={form.bookingNumber}
+                onChange={handleChange}
+                variant="outlined"
+                sx={{ bgcolor: "#2d2746" }}
+                autoComplete="off"
               />
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <TextField
-              fullWidth
-              label="Hotel"
-              name="hotel"
-              value={form.hotel}
-              onChange={handleChange}
-              variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
-              autoComplete="off"
-            />
-            <RadioGroup
-              row
-              name="addressOption"
-              value={form.addressOption}
-              onChange={handleChange}
-              sx={{ mt: 2 }}
-            >
-              <FormControlLabel
-                value="without"
-                control={<Radio sx={{ color: "#fff" }} />}
-                label={<span style={{ fontSize: 14, fontWeight: 400 }}>Without Address</span>}
-                sx={{ mr: 3 }}
-              />
-              <FormControlLabel
-                value="sendLater"
-                control={<Radio sx={{ color: "#fff" }} />}
-                label={<span style={{ fontSize: 14, fontWeight: 400 }}>Send Later</span>}
-              />
-            </RadioGroup>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <PhoneInput
-              country={"th"}
-              value={form.phoneNumber}
-              onChange={handlePhoneChange}
-              inputStyle={{
-                width: "100%",
-                background: "#322b4d",
-                color: "#fff",
-                border: "1px solid #6c63a7",
-                borderRadius: 8,
-                height: 48,
-                fontSize: 16,
-              }}
-              buttonStyle={{
-                background: "#322b4d",
-                border: "none",
-              }}
-              dropdownStyle={{
-                background: "#322b4d",
-                color: "#000",
-              }}
-              specialLabel=""
-              inputProps={{
-                name: "phoneNumber",
-                required: false,
-                autoFocus: false,
-              }}
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <TextField
-              fullWidth
-              required
-              label="Adult"
-              name="adult"
-              type="number"
-              value={form.adult}
-              onChange={handleChange}
-              variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
-              autoComplete="off"
-            />
-          </Grid>
-          {paxRows.length > 0 && (
-            <Grid item xs={12} md={6} container spacing={2} alignItems="center">
-              {paxRows.map((row, idx) => (
-                <Grid item xs={12} md={6} key={idx} container spacing={1} alignItems="center">
-                  <Grid item xs={5}>
-                    <TextField
-                      fullWidth
-                      type="number"
-                      value={row.count}
-                      onChange={e => handlePaxCountChange(idx, e.target.value)}
-                      variant="outlined"
-                      sx={{ bgcolor: "#2d2746" }}
-                      autoComplete="off"
-                    />
-                  </Grid>
-                  <Grid item xs={5}>
-                    <TextField
-                      select
-                      fullWidth
-                      value={row.type}
-                      onChange={e => handlePaxTypeChange(idx, e.target.value)}
-                      variant="outlined"
-                      sx={{ bgcolor: "#2d2746" }}
-                      autoComplete="off"
-                    >
-                      <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
-                        child
-                      </MenuItem>
-                      <MenuItem value="infant" disabled={paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
-                        infant
-                      </MenuItem>
-                    </TextField>
-                  </Grid>
-                  <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8', borderRadius: 1, p: 1, transition: 'background 0.2s', '&:hover': { background: '#3a2e6e' } }}>
-                      <DeleteIcon />
-                    </Button>
-                  </Grid>
-                </Grid>
-              ))}
             </Grid>
-          )}
-          <Grid item xs={12} md={3}>
-            <Button
-              variant="text"
-              sx={{ color: "#a084e8", ml: 1, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, transition: 'color 0.2s', '&:hover': { color: '#fff' } }}
-              onClick={handleAddPax}
-            >
-              + Add Pax
-            </Button>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <TextField
-              fullWidth
-              required
-              label="Cash on Tour"
-              name="cashTours"
-              value={form.cashTours}
-              onChange={handleChange}
-              variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
-              autoComplete="off"
-            />
-            <RadioGroup
-              row
-              name="parkFee"
-              value={form.parkFee}
-              onChange={e => {
-                const value = e.target.value;
-                setForm(prev => ({
-                  ...prev,
-                  parkFee: value,
-                  cashTours: value === 'none' ? 'None' : 'National Park Fee',
-                }));
-              }}
-              sx={{ mt: 2 }}
-            >
-              <FormControlLabel
-                value="none"
-                control={<Radio sx={{ color: "#fff" }} />}
-                label={<span style={{ fontSize: 14, fontWeight: 400 }}>None</span>}
-                sx={{ mr: 3 }}
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                required
+                label="Program"
+                name="program"
+                value={form.program}
+                onChange={handleChange}
+                variant="outlined"
+                sx={{ bgcolor: "#2d2746" }}
+                autoComplete="off"
               />
-              <FormControlLabel
-                value="fee"
-                control={<Radio sx={{ color: "#fff" }} />}
-                label={<span style={{ fontSize: 14, fontWeight: 400 }}>National Park Fee</span>}
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                required
+                label="Name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                variant="outlined"
+                sx={{ bgcolor: "#2d2746" }}
+                autoComplete="off"
               />
-            </RadioGroup>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Tour Date"
+                  value={form.tourDate}
+                  onChange={handleDateChange}
+                  renderInput={(params) => (
+                    <TextField {...params} fullWidth required variant="outlined" sx={{ bgcolor: "#2d2746" }} autoComplete="off" />
+                  )}
+                />
+              </LocalizationProvider>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                label="Hotel"
+                name="hotel"
+                value={form.hotel}
+                onChange={handleChange}
+                variant="outlined"
+                sx={{ bgcolor: "#2d2746" }}
+                autoComplete="off"
+              />
+              <RadioGroup
+                row
+                name="addressOption"
+                value={form.addressOption}
+                onChange={handleChange}
+                sx={{ mt: 2 }}
+              >
+                <FormControlLabel
+                  value="without"
+                  control={<Radio sx={{ color: "#fff" }} />}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>Without Address</span>}
+                  sx={{ mr: 3 }}
+                />
+                <FormControlLabel
+                  value="sendLater"
+                  control={<Radio sx={{ color: "#fff" }} />}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>Send Later</span>}
+                />
+              </RadioGroup>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <PhoneInput
+                country={"th"}
+                value={form.phoneNumber}
+                onChange={handlePhoneChange}
+                inputStyle={{
+                  width: "100%",
+                  background: "#322b4d",
+                  color: "#fff",
+                  border: "1px solid #6c63a7",
+                  borderRadius: 8,
+                  height: 48,
+                  fontSize: 16,
+                }}
+                buttonStyle={{
+                  background: "#322b4d",
+                  border: "none",
+                }}
+                dropdownStyle={{
+                  background: "#322b4d",
+                  color: "#000",
+                }}
+                specialLabel=""
+                inputProps={{
+                  name: "phoneNumber",
+                  required: false,
+                  autoFocus: false,
+                }}
+                autoComplete="off"
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                required
+                label="Adult"
+                name="adult"
+                type="number"
+                value={form.adult}
+                onChange={handleChange}
+                variant="outlined"
+                sx={{ bgcolor: "#2d2746" }}
+                autoComplete="off"
+              />
+            </Grid>
+            {paxRows.length > 0 && (
+              <Grid item xs={12} md={6} container spacing={2} alignItems="center">
+                {paxRows.map((row, idx) => (
+                  <Grid item xs={12} md={6} key={idx} container spacing={1} alignItems="center">
+                    <Grid item xs={5}>
+                      <TextField
+                        fullWidth
+                        type="number"
+                        value={row.count}
+                        onChange={e => handlePaxCountChange(idx, e.target.value)}
+                        variant="outlined"
+                        sx={{ bgcolor: "#2d2746" }}
+                        autoComplete="off"
+                      />
+                    </Grid>
+                    <Grid item xs={5}>
+                      <TextField
+                        select
+                        fullWidth
+                        value={row.type}
+                        onChange={e => handlePaxTypeChange(idx, e.target.value)}
+                        variant="outlined"
+                        sx={{ bgcolor: "#2d2746" }}
+                        autoComplete="off"
+                      >
+                        <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
+                          child
+                        </MenuItem>
+                        <MenuItem value="infant" disabled={paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
+                          infant
+                        </MenuItem>
+                      </TextField>
+                    </Grid>
+                    <Grid item xs={2} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Button onClick={() => handleRemovePax(idx)} sx={{ minWidth: 0, color: '#a084e8', borderRadius: 1, p: 1, transition: 'background 0.2s', '&:hover': { background: '#3a2e6e' } }}>
+                        <DeleteIcon />
+                      </Button>
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+            )}
+            <Grid item xs={12} md={3}>
+              <Button
+                variant="text"
+                sx={{ color: "#a084e8", ml: 1, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, transition: 'color 0.2s', '&:hover': { color: '#fff' } }}
+                onClick={handleAddPax}
+              >
+                + Add Pax
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <TextField
+                fullWidth
+                required
+                label="Cash on Tour"
+                name="cashTours"
+                value={form.cashTours}
+                onChange={handleChange}
+                variant="outlined"
+                sx={{ bgcolor: "#2d2746" }}
+                autoComplete="off"
+              />
+              <RadioGroup
+                row
+                name="parkFee"
+                value={form.parkFee}
+                onChange={e => {
+                  const value = e.target.value;
+                  setForm(prev => ({
+                    ...prev,
+                    parkFee: value,
+                    cashTours: value === 'none' ? 'None' : 'National Park Fee',
+                  }));
+                }}
+                sx={{ mt: 2 }}
+              >
+                <FormControlLabel
+                  value="none"
+                  control={<Radio sx={{ color: "#fff" }} />}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>None</span>}
+                  sx={{ mr: 3 }}
+                />
+                <FormControlLabel
+                  value="fee"
+                  control={<Radio sx={{ color: "#fff" }} />}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>National Park Fee</span>}
+                />
+              </RadioGroup>
+            </Grid>
+            <Grid item xs={12} sx={{ display: "flex", gap: 2, mt: 4 }}>
+              <Button type="submit" variant="contained" sx={{ bgcolor: "#a084e8", minWidth: 180 }}>
+                OK / Copy
+              </Button>
+              <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+                CLEAR
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sx={{ display: "flex", gap: 2, mt: 4 }}>
-            <Button type="submit" variant="contained" sx={{ bgcolor: "#a084e8", minWidth: 180 }}>
-              OK / Copy
-            </Button>
-            <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
-              CLEAR
-            </Button>
-          </Grid>
-        </Grid>
+        </Box>
       </Paper>
       {showConfirm && (
         <Paper sx={{ p: 3, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
