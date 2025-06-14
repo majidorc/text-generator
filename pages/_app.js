@@ -25,6 +25,7 @@ function Layout({ children, pageTitle }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const router = useRouter();
   const menu = [
+    { text: "Forms", href: "/forms" },
     { text: "Operator Form", href: "/" },
     { text: "Customer", href: "/customer" },
   ];
