@@ -441,4 +441,6 @@ export default function Home() {
       </Container>
     </Box>
   );
-} 
+}
+
+Home.pageTitle = "Operator Form"; 
