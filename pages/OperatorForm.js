@@ -105,10 +105,28 @@ export default function OperatorForm() {
     paxLine = `Pax : ${parts.join(', ')}`;
   }
 
-  const confirmationText =
-    form.addressOption === "without"
-      ? `Please confirm the for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\n${paxLine}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}`
-      : `Please confirm the *pickup time* for this booking:\n\nBooking no : ${form.bookingNumber}\nTour date : ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\nProgram : ${form.program}\nName : ${form.name}\n${paxLine}\nHotel : ${form.hotel}\nPhone Number : ${form.phoneNumber}\nCash on tour : ${form.cashTours || "None"}\n\nPlease mentioned if there is any additional charge for transfer collect from customer`;
+  function buildConfirmationText() {
+    const lines = [];
+    if (form.addressOption === "without") {
+      lines.push("Please confirm the for this booking:\n");
+    } else {
+      lines.push("Please confirm the *pickup time* for this booking:\n");
+    }
+    if (form.bookingNumber) lines.push(`Booking no : ${form.bookingNumber}`);
+    if (form.tourDate) lines.push(`Tour date : ${dayjs(form.tourDate).format("DD MMM YYYY")}`);
+    if (form.program) lines.push(`Program : ${form.program}`);
+    if (form.name) lines.push(`Name : ${form.name}`);
+    if (paxLine) lines.push(paxLine);
+    if (form.addressOption !== "without" && form.hotel) lines.push(`Hotel : ${form.hotel}`);
+    if (form.phoneNumber) lines.push(`Phone Number : ${form.phoneNumber}`);
+    if (form.cashTours) lines.push(`Cash on tour : ${form.cashTours}`);
+    if (form.addressOption !== "without") {
+      lines.push("\nPlease mentioned if there is any additional charge for transfer collect from customer");
+    }
+    return lines.join("\n");
+  }
+
+  const confirmationText = buildConfirmationText();
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(confirmationText);
