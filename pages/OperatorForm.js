@@ -38,7 +38,7 @@ export default function OperatorForm() {
     hotel: "",
     phoneNumber: "",
     addressOption: "",
-    cashTours: "",
+    cashTours: "None",
     adult: 1,
     parkFee: "none",
   });
@@ -87,7 +87,7 @@ export default function OperatorForm() {
       hotel: "",
       phoneNumber: "",
       addressOption: "",
-      cashTours: "",
+      cashTours: "None",
       adult: 1,
       parkFee: "none",
     });
