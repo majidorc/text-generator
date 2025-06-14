@@ -147,6 +147,7 @@ export default function Home() {
             maxWidth: 1100,
             mx: "auto",
           }}
+          autoComplete="off"
         >
           <Typography variant="h6" align="center" gutterBottom sx={{ fontWeight: 700, mb: 4 }}>
             Operator Form
@@ -164,6 +165,7 @@ export default function Home() {
                 variant="outlined"
                 InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -177,6 +179,7 @@ export default function Home() {
                 variant="outlined"
                 InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -190,6 +193,7 @@ export default function Home() {
                 variant="outlined"
                 InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
+                autoComplete="off"
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -206,6 +210,7 @@ export default function Home() {
                       variant="outlined"
                       InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                       InputLabelProps={{ style: { color: "#fff" } }}
+                      autoComplete="off"
                     />
                   )}
                 />
@@ -221,6 +226,7 @@ export default function Home() {
                 variant="outlined"
                 InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
+                autoComplete="off"
               />
               <RadioGroup
                 row
@@ -270,6 +276,7 @@ export default function Home() {
                   required: false,
                   autoFocus: false,
                 }}
+                autoComplete="off"
               />
             </Grid>
             {/* Adult and PAX fields */}
@@ -285,6 +292,7 @@ export default function Home() {
                 variant="outlined"
                 InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
+                autoComplete="off"
               />
             </Grid>
             {paxRows.length > 0 && (
@@ -300,6 +308,7 @@ export default function Home() {
                         variant="outlined"
                         InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                         sx={{ bgcolor: "#322b4d", borderRadius: 0 }}
+                        autoComplete="off"
                       />
                     </Grid>
                     <Grid item xs={5}>
@@ -311,6 +320,7 @@ export default function Home() {
                         variant="outlined"
                         InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                         sx={{ bgcolor: "#322b4d", borderRadius: 0 }}
+                        autoComplete="off"
                       >
                         <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
                           child
@@ -350,6 +360,7 @@ export default function Home() {
                 variant="outlined"
                 InputProps={{ style: { color: "#fff", borderRadius: 0, height: 48 } }}
                 InputLabelProps={{ style: { color: "#fff" } }}
+                autoComplete="off"
               />
               <RadioGroup
                 row
