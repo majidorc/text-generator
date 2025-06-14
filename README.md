@@ -8,7 +8,7 @@ This project is a modern, responsive operator form built with Next.js and Materi
 - Instantly generates a confirmation message you can copy/share.
 - Automatically copies the confirmation to your clipboard after submit.
 - Fully responsive and easy to use on any device.
-- Built and iterated **super fast and easily with the help of this AI assistant (@cursor)**
+- Built and iterated **super fast and easily with the help of this AI assistant ([\@cursor](https://github.com/getcursor/cursor))**
 
 ## How to use it (It's super easy!)
 
@@ -34,7 +34,7 @@ This project is a modern, responsive operator form built with Next.js and Materi
 
 - **No backend needed**: All logic is in the frontend.
 - **Modern stack**: Next.js + MUI = fast, beautiful, and production-ready.
-- **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant (@cursor).
+- **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant ([\@cursor](https://github.com/getcursor/cursor)).
 - **Copy-paste ready**: You can adapt this for any operator, agency, or booking workflow.
 
 ---
