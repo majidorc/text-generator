@@ -57,6 +57,19 @@ export default function Customer() {
     }
   };
 
+  const handleToggleFee = () => {
+    setWithFee((prev) => {
+      if (prev) {
+        setShowFeeFields(false);
+        return false;
+      } else {
+        setShowFeeFields(true);
+        return true;
+      }
+    });
+    setShowConfirm(false);
+  };
+
   const handleWithFeeConfirm = () => {
     setShowConfirm(true);
     navigator.clipboard.writeText(confirmationText(true));
@@ -190,18 +203,25 @@ export default function Customer() {
                 </Button>
               </Grid>
               <Grid item xs={12} md={2}>
-                <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={() => handleSubmit(true)}>
+                <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={handleToggleFee}>
                   With Fee
                 </Button>
               </Grid>
             </>
           )}
           {showFeeFields && (
-            <Grid item xs={12} md={2}>
-              <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={handleWithFeeConfirm}>
-                Send Mail
-              </Button>
-            </Grid>
+            <>
+              <Grid item xs={12} md={2}>
+                <Button fullWidth variant="contained" color="primary" sx={{ bgcolor: "#a084e8" }} onClick={handleWithFeeConfirm}>
+                  Send Mail
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={2}>
+                <Button fullWidth variant="contained" color="secondary" sx={{ bgcolor: "#a084e8" }} onClick={handleToggleFee}>
+                  Without Fee
+                </Button>
+              </Grid>
+            </>
           )}
         </Grid>
       </Paper>
