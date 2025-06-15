@@ -21,31 +21,17 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function Customer({ sharedName, setSharedName }) {
-  const [form, setForm] = useState({
-    tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day').startOf('day'),
-    name: sharedName || "",
-    pickUp: "",
-    exTransfer: "",
-    pickupFrom: dayjs().hour(8).minute(0),
-    pickupTo: dayjs().hour(9).minute(0),
-    sendNow: false,
-    feeAdult: "0",
-    feeChild: "0",
-  });
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [snackbar, setSnackbar] = useState({ open: false, message: "" });
-  const [showFeeFields, setShowFeeFields] = useState(false);
-  const [withFee, setWithFee] = useState(false);
+export default function Customer({ sharedName, setSharedName, form, setForm }) {
+  const [showConfirm, setShowConfirm] = React.useState(false);
+  const [snackbar, setSnackbar] = React.useState({ open: false, message: "" });
 
   // Update confirmation text instantly if box is open and fee mode/values change
   React.useEffect(() => {
     if (showConfirm) {
-      // Copy updated confirmation text to clipboard
-      navigator.clipboard.writeText(confirmationText(withFee));
+      navigator.clipboard.writeText(confirmationText(form.withFee));
     }
     // eslint-disable-next-line
-  }, [withFee, form.feeAdult, form.feeChild, form.exTransfer, form.pickUp, form.tourDate, form.pickupFrom, form.pickupTo, form.name]);
+  }, [form.withFee, form.feeAdult, form.feeChild, form.exTransfer, form.pickUp, form.tourDate, form.pickupFrom, form.pickupTo, form.name]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -68,24 +54,20 @@ export default function Customer({ sharedName, setSharedName }) {
   };
 
   const handleSubmit = (fee) => {
-    setWithFee(fee);
-    setShowFeeFields(fee);
+    setForm((prev) => ({ ...prev, withFee: fee, showFeeFields: fee }));
     setShowConfirm(true);
     navigator.clipboard.writeText(confirmationText(fee));
     setSnackbar({ open: true, message: "Copied to clipboard!" });
   };
 
   const handleToggleFee = () => {
-    setWithFee((prev) => {
-      if (prev) {
-        setShowFeeFields(false);
-        return false;
+    setForm((prev) => {
+      if (prev.withFee) {
+        return { ...prev, withFee: false, showFeeFields: false };
       } else {
-        setShowFeeFields(true);
-        return true;
+        return { ...prev, withFee: true, showFeeFields: true };
       }
     });
-    // Do not reset confirmation box, just update text if open
   };
 
   const handleWithFeeConfirm = () => {
@@ -105,10 +87,10 @@ export default function Customer({ sharedName, setSharedName }) {
       sendNow: false,
       feeAdult: "0",
       feeChild: "0",
+      showFeeFields: false,
+      withFee: false,
     });
     setShowConfirm(false);
-    setShowFeeFields(false);
-    setWithFee(false);
     setSharedName("");
   };
 
@@ -211,7 +193,7 @@ export default function Customer({ sharedName, setSharedName }) {
               />
             </LocalizationProvider>
           </Grid>
-          {showFeeFields && (
+          {form.showFeeFields && (
             <>
               <Grid item xs={12} md={3}>
                 <TextField
@@ -238,7 +220,7 @@ export default function Customer({ sharedName, setSharedName }) {
             </>
           )}
           <Grid item xs={12} mt={2} display="flex" justifyContent="center" gap={2}>
-            {!showFeeFields && (
+            {!form.showFeeFields && (
               <>
                 <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={() => handleSubmit(false)}>
                   OK / Copy
@@ -251,7 +233,7 @@ export default function Customer({ sharedName, setSharedName }) {
                 </Button>
               </>
             )}
-            {showFeeFields && (
+            {form.showFeeFields && (
               <>
                 <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleWithFeeConfirm}>
                   OK / Copy
@@ -270,9 +252,9 @@ export default function Customer({ sharedName, setSharedName }) {
       {showConfirm && (
         <Paper sx={{ p: 3, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
           <pre style={{ color: "#fff", fontFamily: "inherit", fontSize: 16, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-            {confirmationText(withFee)}
+            {confirmationText(form.withFee)}
           </pre>
-          <Button variant="contained" sx={{ bgcolor: "#a084e8", mt: 2 }} onClick={() => {navigator.clipboard.writeText(confirmationText(withFee)); setSnackbar({ open: true, message: "Copied to clipboard!" });}}>
+          <Button variant="contained" sx={{ bgcolor: "#a084e8", mt: 2 }} onClick={() => {navigator.clipboard.writeText(confirmationText(form.withFee)); setSnackbar({ open: true, message: "Copied to clipboard!" });}}>
             Copy Email
           </Button>
         </Paper>

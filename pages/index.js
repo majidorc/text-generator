@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Box, Container, Paper, Tabs, Tab } from "@mui/material";
 import dynamic from "next/dynamic";
+import dayjs from "dayjs";
 
 // Dynamically import the forms to avoid SSR issues
 const OperatorForm = dynamic(() => import("./OperatorForm"), { ssr: false });
@@ -17,6 +18,34 @@ function TabPanel({ children, value, index }) {
 export default function IndexPage() {
   const [tab, setTab] = useState(0);
   const [sharedName, setSharedName] = useState("");
+  // Operator form state
+  const [operatorForm, setOperatorForm] = useState({
+    bookingNumber: "",
+    program: "",
+    name: "",
+    tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
+    hotel: "",
+    phoneNumber: "",
+    addressOption: "",
+    cashTours: "None",
+    adult: 1,
+    parkFee: "none",
+    paxRows: [],
+  });
+  // Customer form state
+  const [customerForm, setCustomerForm] = useState({
+    tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day').startOf('day'),
+    name: "",
+    pickUp: "",
+    exTransfer: "",
+    pickupFrom: dayjs().hour(8).minute(0),
+    pickupTo: dayjs().hour(9).minute(0),
+    sendNow: false,
+    feeAdult: "0",
+    feeChild: "0",
+    showFeeFields: false,
+    withFee: false,
+  });
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 2, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
@@ -32,10 +61,20 @@ export default function IndexPage() {
         </Tabs>
       </Paper>
       <TabPanel value={tab} index={0}>
-        <OperatorForm sharedName={sharedName} setSharedName={setSharedName} />
+        <OperatorForm
+          sharedName={sharedName}
+          setSharedName={setSharedName}
+          form={operatorForm}
+          setForm={setOperatorForm}
+        />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <CustomerForm sharedName={sharedName} setSharedName={setSharedName} />
+        <CustomerForm
+          sharedName={sharedName}
+          setSharedName={setSharedName}
+          form={customerForm}
+          setForm={setCustomerForm}
+        />
       </TabPanel>
     </Container>
   );

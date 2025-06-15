@@ -29,22 +29,9 @@ import MenuItem from "@mui/material/MenuItem";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function OperatorForm({ sharedName, setSharedName }) {
-  const [form, setForm] = useState({
-    bookingNumber: "",
-    program: "",
-    name: sharedName || "",
-    tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
-    hotel: "",
-    phoneNumber: "",
-    addressOption: "",
-    cashTours: "None",
-    adult: 1,
-    parkFee: "none",
-  });
+export default function OperatorForm({ sharedName, setSharedName, form, setForm }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: "" });
-  const [paxRows, setPaxRows] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,17 +82,17 @@ export default function OperatorForm({ sharedName, setSharedName }) {
       cashTours: "None",
       adult: 1,
       parkFee: "none",
+      paxRows: [],
     });
     setShowConfirm(false);
     setSharedName("");
-    setPaxRows([]);
   };
 
   // Compose Pax line for confirmation text
   let paxLine = `Pax : ${form.adult} adult`;
-  if (paxRows.length > 0) {
-    const childRow = paxRows.find(row => row.type === 'child');
-    const infantRow = paxRows.find(row => row.type === 'infant');
+  if (form.paxRows && form.paxRows.length > 0) {
+    const childRow = form.paxRows.find(row => row.type === 'child');
+    const infantRow = form.paxRows.find(row => row.type === 'infant');
     const parts = [`${form.adult} adult`];
     if (childRow) parts.push(`${childRow.count} child`);
     if (infantRow) parts.push(`${infantRow.count} infant`);
@@ -141,25 +128,34 @@ export default function OperatorForm({ sharedName, setSharedName }) {
   };
 
   const handleAddPax = () => {
-    const types = paxRows.map((row) => row.type);
+    const types = form.paxRows.map((row) => row.type);
     if (!types.includes("child")) {
-      setPaxRows([...paxRows, { type: "child", count: 1 }]);
+      setForm((prev) => ({ ...prev, paxRows: [...prev.paxRows, { type: "child", count: 1 }] }));
     } else if (!types.includes("infant")) {
-      setPaxRows([...paxRows, { type: "infant", count: 1 }]);
+      setForm((prev) => ({ ...prev, paxRows: [...prev.paxRows, { type: "infant", count: 1 }] }));
     }
   };
 
   const handlePaxTypeChange = (idx, value) => {
-    if (paxRows.some((row, i) => row.type === value && i !== idx)) return;
-    setPaxRows((prev) => prev.map((row, i) => (i === idx ? { ...row, type: value } : row)));
+    if (form.paxRows.some((row, i) => row.type === value && i !== idx)) return;
+    setForm((prev) => ({
+      ...prev,
+      paxRows: prev.paxRows.map((row, i) => (i === idx ? { ...row, type: value } : row)),
+    }));
   };
 
   const handlePaxCountChange = (idx, value) => {
-    setPaxRows((prev) => prev.map((row, i) => (i === idx ? { ...row, count: value } : row)));
+    setForm((prev) => ({
+      ...prev,
+      paxRows: prev.paxRows.map((row, i) => (i === idx ? { ...row, count: value } : row)),
+    }));
   };
 
   const handleRemovePax = (idx) => {
-    setPaxRows((prev) => prev.filter((_, i) => i !== idx));
+    setForm((prev) => ({
+      ...prev,
+      paxRows: prev.paxRows.filter((_, i) => i !== idx),
+    }));
   };
 
   return (
@@ -294,9 +290,9 @@ export default function OperatorForm({ sharedName, setSharedName }) {
                 autoComplete="off"
               />
             </Grid>
-            {paxRows.length > 0 && (
+            {form.paxRows && form.paxRows.length > 0 && (
               <Grid item xs={12} md={6} container spacing={2} alignItems="center">
-                {paxRows.map((row, idx) => (
+                {form.paxRows.map((row, idx) => (
                   <Grid item xs={12} md={6} key={idx} container spacing={1} alignItems="center">
                     <Grid item xs={5}>
                       <TextField
@@ -319,10 +315,10 @@ export default function OperatorForm({ sharedName, setSharedName }) {
                         sx={{ bgcolor: "#2d2746" }}
                         autoComplete="off"
                       >
-                        <MenuItem value="child" disabled={paxRows.some((r, i) => r.type === "child" && i !== idx)}>
+                        <MenuItem value="child" disabled={form.paxRows.some((r, i) => r.type === "child" && i !== idx)}>
                           child
                         </MenuItem>
-                        <MenuItem value="infant" disabled={paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
+                        <MenuItem value="infant" disabled={form.paxRows.some((r, i) => r.type === "infant" && i !== idx)}>
                           infant
                         </MenuItem>
                       </TextField>
