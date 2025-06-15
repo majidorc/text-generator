@@ -2,8 +2,6 @@
 
 This project is a modern, responsive web app built with Next.js and Material-UI (MUI). It is designed for tour operators or travel agencies (like [tours.co.th](https://tours.co.th)) to quickly collect and confirm booking details in a beautiful, user-friendly way.
 
-**Live Demo:** [text.tours.co.th](https://text.tours.co.th)
-
 ## Features
 
 - **Operator Form**: Enter booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit. **Click the CLEAR button to instantly reset all fields, including the shared name.**
