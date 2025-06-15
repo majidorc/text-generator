@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Box, Container, Paper, Tabs, Tab } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Box, Container, Paper, Tabs, Tab, IconButton } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { ThemeModeContext } from "./_app";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -52,6 +55,7 @@ export default function IndexPage() {
   });
   // Track last hotel value synced to pickUp
   const [lastHotelSynced, setLastHotelSynced] = useState("");
+  const { mode, handleToggle } = useContext(ThemeModeContext);
 
   useEffect(() => {
     if (
@@ -67,17 +71,23 @@ export default function IndexPage() {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
-      <Paper sx={{ p: 2, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
-        <Tabs
-          value={tab}
-          onChange={(_, v) => setTab(v)}
-          textColor="inherit"
-          indicatorColor="secondary"
-          centered
-        >
-          <Tab label="Operator Form" />
-          <Tab label="Customer Form" />
-        </Tabs>
+      <Paper sx={{ p: 2, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Tabs
+            value={tab}
+            onChange={(_, v) => setTab(v)}
+            textColor="inherit"
+            indicatorColor="secondary"
+            centered
+            sx={{ flex: 1 }}
+          >
+            <Tab label="Operator Form" />
+            <Tab label="Customer Form" />
+          </Tabs>
+          <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
+            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+        </Box>
       </Paper>
       <TabPanel value={tab} index={0}>
         <OperatorForm

@@ -1,9 +1,11 @@
 import "../styles/globals.css";
-import { CssBaseline, IconButton, Box } from "@mui/material";
+import { CssBaseline, Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, createContext } from "react";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+
+export const ThemeModeContext = createContext({ mode: "dark", handleToggle: () => {} });
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -45,22 +47,19 @@ export default function App({ Component, pageProps }) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', p: 1 }}>
-          <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
-            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
+    <ThemeModeContext.Provider value={{ mode, handleToggle }}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ flex: 1 }}>
+            <Component {...pageProps} />
+          </Box>
+          <footer style={{ textAlign: 'center', padding: '16px 0', background: theme.palette.background.paper, color: theme.palette.text.primary, fontSize: 16 }}>
+            <span role="img" aria-label="love" style={{ fontSize: 18, verticalAlign: 'middle', marginRight: 4 }}>❤️</span>
+            <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
+          </footer>
         </Box>
-        <Box sx={{ flex: 1 }}>
-          <Component {...pageProps} />
-        </Box>
-        <footer style={{ textAlign: 'center', padding: '16px 0', background: theme.palette.background.paper, color: theme.palette.text.primary, fontSize: 16 }}>
-          <span role="img" aria-label="love" style={{ fontSize: 18, verticalAlign: 'middle', marginRight: 4 }}>❤️</span>
-          <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
-        </footer>
-      </Box>
-    </ThemeProvider>
+      </ThemeProvider>
+    </ThemeModeContext.Provider>
   );
 } 
