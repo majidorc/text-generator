@@ -94,6 +94,24 @@ export default function Customer({ sharedName, setSharedName }) {
     setSnackbar({ open: true, message: "Copied to clipboard!" });
   };
 
+  const handleClear = () => {
+    setForm({
+      tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day').startOf('day'),
+      name: "",
+      pickUp: "",
+      exTransfer: "",
+      pickupFrom: dayjs().hour(8).minute(0),
+      pickupTo: dayjs().hour(9).minute(0),
+      sendNow: false,
+      feeAdult: "0",
+      feeChild: "0",
+    });
+    setShowConfirm(false);
+    setShowFeeFields(false);
+    setWithFee(false);
+    setSharedName("");
+  };
+
   const confirmationText = (fee) => {
     const pickUpText = form.exTransfer
       ? `Pick up: ${form.pickUp} ( extra charge for private transfer ${form.exTransfer}THB )`
@@ -228,6 +246,9 @@ export default function Customer({ sharedName, setSharedName }) {
                 <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
                   With Fee
                 </Button>
+                <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+                  CLEAR
+                </Button>
               </>
             )}
             {showFeeFields && (
@@ -237,6 +258,9 @@ export default function Customer({ sharedName, setSharedName }) {
                 </Button>
                 <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
                   Without Fee
+                </Button>
+                <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+                  CLEAR
                 </Button>
               </>
             )}

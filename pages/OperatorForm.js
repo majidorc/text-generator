@@ -87,7 +87,7 @@ export default function OperatorForm({ sharedName, setSharedName }) {
     setForm({
       bookingNumber: "",
       program: "",
-      name: sharedName || "",
+      name: "",
       tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
       hotel: "",
       phoneNumber: "",
@@ -97,6 +97,8 @@ export default function OperatorForm({ sharedName, setSharedName }) {
       parkFee: "none",
     });
     setShowConfirm(false);
+    setSharedName("");
+    setPaxRows([]);
   };
 
   // Compose Pax line for confirmation text

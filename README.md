@@ -4,8 +4,8 @@ This project is a modern, responsive web app built with Next.js and Material-UI 
 
 ## What is this?
 
-- **Operator Form**: A web form for entering booking details: booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit.
-- **Customer Page**: A dedicated form for customer booking confirmation. Enter tour date, name, pick up, pickup time (from/to), and optionally FEE Adult/Child fields. Instantly preview and copy a formatted confirmation email. Toggle FEE fields by clicking "With Fee". Designed for quick, accurate customer communication.
+- **Operator Form**: A web form for entering booking details: booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit. **Click the CLEAR button to instantly reset all fields, including the shared name.**
+- **Customer Page**: A dedicated form for customer booking confirmation. Enter tour date, name, pick up, pickup time (from/to), and optionally FEE Adult/Child fields. Instantly preview and copy a formatted confirmation email. Toggle FEE fields by clicking "With Fee". Designed for quick, accurate customer communication. **Click the CLEAR button to instantly reset all fields, including the shared name.**
 - **Persistent Side Menu**: Easily navigate between Operator Form and Customer pages using the always-visible (desktop) or toggleable (mobile) side menu.
 - **PWA (Progressive Web App) Support**: Install this app on your device for a native-like experience. Works offline and can be added to your home screen on mobile and desktop.
 - Fully responsive and easy to use on any device.
