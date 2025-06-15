@@ -21,10 +21,10 @@ import timezone from "dayjs/plugin/timezone";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function Customer() {
+export default function Customer({ sharedName, setSharedName }) {
   const [form, setForm] = useState({
     tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day').startOf('day'),
-    name: "",
+    name: sharedName || "",
     pickUp: "",
     exTransfer: "",
     pickupFrom: dayjs().hour(8).minute(0),
@@ -49,6 +49,11 @@ export default function Customer() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if (name === "name") {
+      setSharedName(value);
+      setForm((prev) => ({ ...prev, name: value }));
+      return;
+    }
     setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
@@ -134,7 +139,7 @@ export default function Customer() {
               fullWidth
               label="Name :*"
               name="name"
-              value={form.name}
+              value={sharedName}
               onChange={handleChange}
               variant="outlined"
               sx={{ bgcolor: "#2d2746" }}

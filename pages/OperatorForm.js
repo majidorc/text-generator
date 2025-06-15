@@ -29,11 +29,11 @@ import MenuItem from "@mui/material/MenuItem";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function OperatorForm() {
+export default function OperatorForm({ sharedName, setSharedName }) {
   const [form, setForm] = useState({
     bookingNumber: "",
     program: "",
-    name: "",
+    name: sharedName || "",
     tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
     hotel: "",
     phoneNumber: "",
@@ -48,6 +48,11 @@ export default function OperatorForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "name") {
+      setSharedName(value);
+      setForm((prev) => ({ ...prev, name: value }));
+      return;
+    }
     if (name === "addressOption") {
       if (value === "without") {
         setForm((prev) => ({ ...prev, addressOption: value, hotel: "" }));
@@ -82,7 +87,7 @@ export default function OperatorForm() {
     setForm({
       bookingNumber: "",
       program: "",
-      name: "",
+      name: sharedName || "",
       tourDate: dayjs().tz('Asia/Bangkok').add(1, 'day'),
       hotel: "",
       phoneNumber: "",
@@ -192,7 +197,7 @@ export default function OperatorForm() {
                 required
                 label="Name"
                 name="name"
-                value={form.name}
+                value={sharedName}
                 onChange={handleChange}
                 variant="outlined"
                 sx={{ bgcolor: "#2d2746" }}

@@ -16,6 +16,7 @@ function TabPanel({ children, value, index }) {
 
 export default function IndexPage() {
   const [tab, setTab] = useState(0);
+  const [sharedName, setSharedName] = useState("");
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 2, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
@@ -31,10 +32,10 @@ export default function IndexPage() {
         </Tabs>
       </Paper>
       <TabPanel value={tab} index={0}>
-        <OperatorForm />
+        <OperatorForm sharedName={sharedName} setSharedName={setSharedName} />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <CustomerForm />
+        <CustomerForm sharedName={sharedName} setSharedName={setSharedName} />
       </TabPanel>
     </Container>
   );
