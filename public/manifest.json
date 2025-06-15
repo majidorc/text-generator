@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "name": "Thailand Tours Operator",
   "short_name": "Tours",
   "description": "Operator and Customer Form for Thailand Tours",
@@ -18,5 +19,16 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "screenshots": [
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "travel"]
 } 
