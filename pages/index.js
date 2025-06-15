@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Box, Container, Paper, Tabs, Tab } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 // Dynamically import the forms to avoid SSR issues
 const OperatorForm = dynamic(() => import("../components/OperatorForm"), { ssr: false });
