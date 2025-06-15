@@ -4,8 +4,8 @@ import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 
 // Dynamically import the forms to avoid SSR issues
-const OperatorForm = dynamic(() => import("./OperatorForm"), { ssr: false });
-const CustomerForm = dynamic(() => import("./customer"), { ssr: false });
+const OperatorForm = dynamic(() => import("../components/OperatorForm"), { ssr: false });
+const CustomerForm = dynamic(() => import("../components/customer"), { ssr: false });
 
 function TabPanel({ children, value, index }) {
   return (
