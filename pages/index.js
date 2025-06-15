@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Container, Paper, Tabs, Tab } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
@@ -50,6 +50,13 @@ export default function IndexPage() {
     showFeeFields: false,
     withFee: false,
   });
+
+  useEffect(() => {
+    if (operatorForm.hotel && operatorForm.hotel !== customerForm.pickUp) {
+      setCustomerForm((prev) => ({ ...prev, pickUp: operatorForm.hotel }));
+    }
+  }, [operatorForm.hotel]);
+
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 2, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
