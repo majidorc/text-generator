@@ -54,19 +54,14 @@ export default function IndexPage() {
   const [lastHotelSynced, setLastHotelSynced] = useState("");
 
   useEffect(() => {
-    const shouldSync =
+    if (
       operatorForm.addressOption !== 'sendLater' &&
-      operatorForm.addressOption !== 'without' &&
-      operatorForm.hotel &&
-      (customerForm.pickUp === '' || customerForm.pickUp === lastHotelSynced);
-    if (shouldSync) {
+      operatorForm.addressOption !== 'without'
+    ) {
       setCustomerForm((prev) => ({ ...prev, pickUp: operatorForm.hotel }));
-      setLastHotelSynced(operatorForm.hotel);
     }
-    // Clear pickUp if addressOption is sendLater/without
-    if ((operatorForm.addressOption === 'sendLater' || operatorForm.addressOption === 'without') && customerForm.pickUp) {
+    if ((operatorForm.addressOption === 'sendLater' || operatorForm.addressOption === 'without')) {
       setCustomerForm((prev) => ({ ...prev, pickUp: '' }));
-      setLastHotelSynced("");
     }
   }, [operatorForm.hotel, operatorForm.addressOption]);
 
