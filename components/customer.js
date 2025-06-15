@@ -221,29 +221,65 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
               </Grid>
             </>
           )}
-          <Grid item xs={12} mt={2} display="flex" justifyContent="center" gap={2}>
+          <Grid item xs={12} mt={2} display="flex" justifyContent="center" gap={2} flexWrap="wrap">
             {!form.showFeeFields && (
               <>
-                <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={() => handleSubmit(false)}>
+                <Button variant="contained" color="primary" sx={{ minWidth: 160, fontWeight: 600 }} onClick={() => handleSubmit(false)}>
                   OK / Copy
                 </Button>
-                <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
+                <Button variant="contained" color="secondary" sx={{ minWidth: 160, fontWeight: 600 }} onClick={handleToggleFee}>
                   With Fee
                 </Button>
-                <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleClear}
+                  sx={{
+                    minWidth: 160,
+                    fontWeight: 600,
+                    borderRadius: 2,
+                    px: 4,
+                    borderColor: 'primary.main',
+                    color: 'primary.main',
+                    bgcolor: 'background.default',
+                    '&:hover': {
+                      bgcolor: 'primary.main',
+                      color: 'background.paper',
+                      borderColor: 'primary.main',
+                    },
+                  }}
+                >
                   CLEAR
                 </Button>
               </>
             )}
             {form.showFeeFields && (
               <>
-                <Button variant="contained" color="primary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleWithFeeConfirm}>
+                <Button variant="contained" color="primary" sx={{ minWidth: 160, fontWeight: 600 }} onClick={handleWithFeeConfirm}>
                   OK / Copy
                 </Button>
-                <Button variant="contained" color="secondary" sx={{ bgcolor: "#a084e8", minWidth: 180 }} onClick={handleToggleFee}>
+                <Button variant="contained" color="secondary" sx={{ minWidth: 160, fontWeight: 600 }} onClick={handleToggleFee}>
                   Without Fee
                 </Button>
-                <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleClear}
+                  sx={{
+                    minWidth: 160,
+                    fontWeight: 600,
+                    borderRadius: 2,
+                    px: 4,
+                    borderColor: 'primary.main',
+                    color: 'primary.main',
+                    bgcolor: 'background.default',
+                    '&:hover': {
+                      bgcolor: 'primary.main',
+                      color: 'background.paper',
+                      borderColor: 'primary.main',
+                    },
+                  }}
+                >
                   CLEAR
                 </Button>
               </>

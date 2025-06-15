@@ -382,11 +382,29 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 />
               </RadioGroup>
             </Grid>
-            <Grid item xs={12} sx={{ display: "flex", gap: 2, mt: 4 }}>
-              <Button type="submit" variant="contained" sx={{ bgcolor: "#a084e8", minWidth: 180 }}>
+            <Grid item xs={12} sx={{ display: "flex", gap: 2, mt: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button type="submit" variant="contained" sx={{ minWidth: 160, fontWeight: 600 }}>
                 OK / Copy
               </Button>
-              <Button variant="outlined" color="secondary" onClick={handleClear} sx={{ borderColor: '#a084e8', color: '#fff', fontWeight: 700, borderRadius: 2, px: 4, '&:hover': { bgcolor: '#3a2e6e', borderColor: '#fff' } }}>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleClear}
+                sx={{
+                  minWidth: 160,
+                  fontWeight: 600,
+                  borderRadius: 2,
+                  px: 4,
+                  borderColor: 'primary.main',
+                  color: 'primary.main',
+                  bgcolor: 'background.default',
+                  '&:hover': {
+                    bgcolor: 'primary.main',
+                    color: 'background.paper',
+                    borderColor: 'primary.main',
+                  },
+                }}
+              >
                 CLEAR
               </Button>
             </Grid>
