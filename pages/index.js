@@ -52,10 +52,19 @@ export default function IndexPage() {
   });
 
   useEffect(() => {
-    if (operatorForm.hotel && operatorForm.hotel !== customerForm.pickUp) {
+    if (
+      operatorForm.addressOption !== 'sendLater' &&
+      operatorForm.addressOption !== 'without' &&
+      operatorForm.hotel &&
+      operatorForm.hotel !== customerForm.pickUp
+    ) {
       setCustomerForm((prev) => ({ ...prev, pickUp: operatorForm.hotel }));
     }
-  }, [operatorForm.hotel]);
+    // Optionally, clear pickUp if addressOption is sendLater/without
+    if ((operatorForm.addressOption === 'sendLater' || operatorForm.addressOption === 'without') && customerForm.pickUp) {
+      setCustomerForm((prev) => ({ ...prev, pickUp: '' }));
+    }
+  }, [operatorForm.hotel, operatorForm.addressOption]);
 
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
