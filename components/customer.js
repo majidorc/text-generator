@@ -17,6 +17,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { useTheme } from "@mui/material/styles";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -24,6 +25,7 @@ dayjs.extend(timezone);
 export default function Customer({ sharedName, setSharedName, form, setForm }) {
   const [showConfirm, setShowConfirm] = React.useState(false);
   const [snackbar, setSnackbar] = React.useState({ open: false, message: "" });
+  const theme = useTheme();
 
   // Update confirmation text instantly if box is open and fee mode/values change
   React.useEffect(() => {
@@ -120,7 +122,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
 
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
-      <Paper sx={{ p: 3, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
+      <Paper sx={{ p: 3, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
         <Grid container spacing={2} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={3}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -129,7 +131,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
                 value={form.tourDate}
                 onChange={handleDateChange}
                 renderInput={(params) => (
-                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "#2d2746" }} />
+                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "background.default" }} />
                 )}
               />
             </LocalizationProvider>
@@ -142,7 +144,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
               value={sharedName}
               onChange={handleChange}
               variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
+              sx={{ bgcolor: "background.default" }}
             />
           </Grid>
           <Grid item xs={12} md={3}>
@@ -153,7 +155,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
               value={form.pickUp}
               onChange={handleChange}
               variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
+              sx={{ bgcolor: "background.default" }}
             />
           </Grid>
           <Grid item xs={12} md={3}>
@@ -164,7 +166,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
               value={form.exTransfer}
               onChange={handleChange}
               variant="outlined"
-              sx={{ bgcolor: "#2d2746" }}
+              sx={{ bgcolor: "background.default" }}
               type="number"
               inputProps={{ min: 0 }}
             />
@@ -176,7 +178,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
                 value={form.pickupFrom}
                 onChange={handleTimeFromChange}
                 renderInput={(params) => (
-                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "#2d2746" }} />
+                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "background.default" }} />
                 )}
               />
             </LocalizationProvider>
@@ -188,7 +190,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
                 value={form.pickupTo}
                 onChange={handleTimeToChange}
                 renderInput={(params) => (
-                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "#2d2746" }} />
+                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "background.default" }} />
                 )}
               />
             </LocalizationProvider>
@@ -203,7 +205,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
                   value={form.feeAdult}
                   onChange={handleChange}
                   variant="outlined"
-                  sx={{ bgcolor: "#2d2746" }}
+                  sx={{ bgcolor: "background.default" }}
                 />
               </Grid>
               <Grid item xs={12} md={3}>
@@ -214,7 +216,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
                   value={form.feeChild}
                   onChange={handleChange}
                   variant="outlined"
-                  sx={{ bgcolor: "#2d2746" }}
+                  sx={{ bgcolor: "background.default" }}
                 />
               </Grid>
             </>

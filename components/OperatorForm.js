@@ -25,6 +25,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@mui/material/styles";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -32,6 +33,7 @@ dayjs.extend(timezone);
 export default function OperatorForm({ sharedName, setSharedName, form, setForm }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: "" });
+  const theme = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -160,7 +162,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
 
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
-      <Paper sx={{ p: 3, bgcolor: "#231f3a", color: "#fff", borderRadius: 2, mb: 4 }}>
+      <Paper sx={{ p: 3, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
         <Box component="form" onSubmit={handleSubmit} autoComplete="off">
           <Grid container spacing={2} alignItems="center" justifyContent="center">
             <Grid item xs={12} md={3}>
@@ -172,7 +174,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 value={form.bookingNumber}
                 onChange={handleChange}
                 variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
+                sx={{ bgcolor: "background.default" }}
                 autoComplete="off"
               />
             </Grid>
@@ -185,7 +187,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 value={form.program}
                 onChange={handleChange}
                 variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
+                sx={{ bgcolor: "background.default" }}
                 autoComplete="off"
               />
             </Grid>
@@ -198,7 +200,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 value={sharedName}
                 onChange={handleChange}
                 variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
+                sx={{ bgcolor: "background.default" }}
                 autoComplete="off"
               />
             </Grid>
@@ -209,7 +211,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                   value={form.tourDate}
                   onChange={handleDateChange}
                   renderInput={(params) => (
-                    <TextField {...params} fullWidth required variant="outlined" sx={{ bgcolor: "#2d2746" }} autoComplete="off" />
+                    <TextField {...params} fullWidth required variant="outlined" sx={{ bgcolor: "background.default" }} autoComplete="off" />
                   )}
                 />
               </LocalizationProvider>
@@ -222,7 +224,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 value={form.hotel}
                 onChange={handleChange}
                 variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
+                sx={{ bgcolor: "background.default" }}
                 autoComplete="off"
               />
               <RadioGroup
@@ -234,13 +236,13 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
               >
                 <FormControlLabel
                   value="without"
-                  control={<Radio sx={{ color: "#fff" }} />}
+                  control={<Radio sx={{ color: "text.primary" }} />}
                   label={<span style={{ fontSize: 14, fontWeight: 400 }}>No Transfer</span>}
                   sx={{ mr: 3 }}
                 />
                 <FormControlLabel
                   value="sendLater"
-                  control={<Radio sx={{ color: "#fff" }} />}
+                  control={<Radio sx={{ color: "text.primary" }} />}
                   label={<span style={{ fontSize: 14, fontWeight: 400 }}>Send Later</span>}
                 />
               </RadioGroup>
@@ -252,20 +254,20 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 onChange={handlePhoneChange}
                 inputStyle={{
                   width: "100%",
-                  background: "#322b4d",
-                  color: "#fff",
+                  background: theme.palette.background.default,
+                  color: theme.palette.text.primary,
                   border: "1px solid #6c63a7",
                   borderRadius: 8,
                   height: 48,
                   fontSize: 16,
                 }}
                 buttonStyle={{
-                  background: "#322b4d",
+                  background: theme.palette.background.default,
                   border: "none",
                 }}
                 dropdownStyle={{
-                  background: "#322b4d",
-                  color: "#000",
+                  background: theme.palette.background.default,
+                  color: theme.palette.text.primary,
                 }}
                 specialLabel=""
                 inputProps={{
@@ -286,7 +288,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 value={form.adult}
                 onChange={handleChange}
                 variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
+                sx={{ bgcolor: "background.default" }}
                 autoComplete="off"
               />
             </Grid>
@@ -301,7 +303,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                         value={row.count}
                         onChange={e => handlePaxCountChange(idx, e.target.value)}
                         variant="outlined"
-                        sx={{ bgcolor: "#2d2746" }}
+                        sx={{ bgcolor: "background.default" }}
                         autoComplete="off"
                       />
                     </Grid>
@@ -312,7 +314,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                         value={row.type}
                         onChange={e => handlePaxTypeChange(idx, e.target.value)}
                         variant="outlined"
-                        sx={{ bgcolor: "#2d2746" }}
+                        sx={{ bgcolor: "background.default" }}
                         autoComplete="off"
                       >
                         <MenuItem value="child" disabled={form.paxRows.some((r, i) => r.type === "child" && i !== idx)}>
@@ -350,7 +352,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                 value={form.cashTours}
                 onChange={handleChange}
                 variant="outlined"
-                sx={{ bgcolor: "#2d2746" }}
+                sx={{ bgcolor: "background.default" }}
                 autoComplete="off"
               />
               <RadioGroup
@@ -369,13 +371,13 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
               >
                 <FormControlLabel
                   value="none"
-                  control={<Radio sx={{ color: "#fff" }} />}
+                  control={<Radio sx={{ color: "text.primary" }} />}
                   label={<span style={{ fontSize: 14, fontWeight: 400 }}>None</span>}
                   sx={{ mr: 3 }}
                 />
                 <FormControlLabel
                   value="fee"
-                  control={<Radio sx={{ color: "#fff" }} />}
+                  control={<Radio sx={{ color: "text.primary" }} />}
                   label={<span style={{ fontSize: 14, fontWeight: 400 }}>National Park Fee</span>}
                 />
               </RadioGroup>
