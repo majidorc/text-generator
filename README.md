@@ -5,7 +5,7 @@ This project is a modern, responsive web app built with Next.js and Material-UI 
 ## Features
 
 - **Operator Form**: Enter booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit. **Click the CLEAR button to instantly reset all fields, including the shared name.**
-- **Customer Form**: Enter tour date, name, pick up (auto-filled from hotel in Operator Form), pickup time (from/to), and optionally FEE Adult/Child fields. Instantly preview and copy a formatted confirmation email. Toggle FEE fields by clicking "With Fee". **Click the CLEAR button to instantly reset all fields, including the shared name.**
+- **Customer Form**: Enter tour date, name, pick up (auto-filled from hotel in Operator Form), pickup time (from/to), and optionally FEE Adult/Child fields. Instantly preview and copy a formatted confirmation email. The confirmation always greets the customer by name ("Hello [Name]") after submission. Toggle FEE fields by clicking "With Fee". **Click the CLEAR button to instantly reset all fields, including the shared name.**
 - **Unified Header**: Easily switch between Operator Form and Customer Form using the top menu. The dark/light mode toggle is now in the header for quick access.
 - **Dark/Light Mode**: Toggle between beautiful dark and light themes. All elements adapt automatically.
 - **Auto-Sync Fields**: Hotel field in Operator Form always syncs to Pick Up in Customer Form (unless address option is Send Later or No Transfer).

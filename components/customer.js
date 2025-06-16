@@ -102,7 +102,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
       : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
-        `Hello ,\n\n` +
+        `Hello ${form.name || ""} ,\n\n` +
         `Warm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\n` +
         `We are pleased to confirm your booking, as detailed below.\n\n` +
         `Tour date:  ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY").replace(/(\d{2}) (\w{3}) (\d{4})/, (m, d, mon, y) => `${parseInt(d)} ${mon} ${y}`) : ""}\n` +

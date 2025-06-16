@@ -37,6 +37,11 @@
 - Bug fixes and polish: improved sync logic, fixed build errors, removed unused pages
 - README and changelog updated
 
+## v1.6.0
+- Confirmation/preview output now always greets the customer by name ("Hello [Name]") after submission
+- Improved copy/share button for confirmation output
+- Phone input improvements (with country flag)
+
 ---
 
 For a full commit history, see the [GitHub repo](https://github.com/majidorc/text-generator/commits/main). 
