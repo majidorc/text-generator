@@ -86,7 +86,7 @@ export default function IndexPage() {
             <Tab label="Customer Form" />
           </Tabs>
           <TextField
-            label="Header Text"
+            label="Your Company Name"
             value={headerText}
             onChange={e => setHeaderText(e.target.value)}
             size="small"
