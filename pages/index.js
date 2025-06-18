@@ -8,6 +8,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ThemeModeContext } from "./_app";
 import { useTheme } from "@mui/material/styles";
+import Head from 'next/head';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -89,83 +90,89 @@ export default function IndexPage() {
   }, [operatorForm.hotel, operatorForm.addressOption]);
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 2 }}>
-      <Paper sx={{ p: 2, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
-        {isMobile ? (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            <Tabs
-              value={tab}
-              onChange={(_, v) => setTab(v)}
-              textColor="inherit"
-              indicatorColor="secondary"
-              centered
-              sx={{ mb: 1 }}
-            >
-              <Tab label="Operator Form" />
-              <Tab label="Customer Form" />
-            </Tabs>
-            {tab === 1 && (
-              <TextField
-                label="Your Company Name"
-                value={headerText}
-                onChange={e => setHeaderText(e.target.value)}
-                size="small"
-                fullWidth
+    <>
+      <Head>
+        <title>Thailand Tours Operator & Customer Form</title>
+        <meta name="description" content="Modern operator and customer form app for Thailand Tours. Create, preview, and share bookings easily." />
+      </Head>
+      <Container maxWidth="xl" sx={{ mt: 2 }}>
+        <Paper sx={{ p: 2, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
+          {isMobile ? (
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <Tabs
+                value={tab}
+                onChange={(_, v) => setTab(v)}
+                textColor="inherit"
+                indicatorColor="secondary"
+                centered
                 sx={{ mb: 1 }}
-              />
-            )}
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
+              >
+                <Tab label="Operator Form" />
+                <Tab label="Customer Form" />
+              </Tabs>
+              {tab === 1 && (
+                <TextField
+                  label="Your Company Name"
+                  value={headerText}
+                  onChange={e => setHeaderText(e.target.value)}
+                  size="small"
+                  fullWidth
+                  sx={{ mb: 1 }}
+                />
+              )}
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
+                  {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+              </Box>
+            </Box>
+          ) : (
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <Tabs
+                value={tab}
+                onChange={(_, v) => setTab(v)}
+                textColor="inherit"
+                indicatorColor="secondary"
+                centered
+                sx={{ flex: 1 }}
+              >
+                <Tab label="Operator Form" />
+                <Tab label="Customer Form" />
+              </Tabs>
+              {tab === 1 && (
+                <TextField
+                  label="Your Company Name"
+                  value={headerText}
+                  onChange={e => setHeaderText(e.target.value)}
+                  size="small"
+                  sx={{ minWidth: 180, mx: 2 }}
+                />
+              )}
+              <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
                 {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
             </Box>
-          </Box>
-        ) : (
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Tabs
-              value={tab}
-              onChange={(_, v) => setTab(v)}
-              textColor="inherit"
-              indicatorColor="secondary"
-              centered
-              sx={{ flex: 1 }}
-            >
-              <Tab label="Operator Form" />
-              <Tab label="Customer Form" />
-            </Tabs>
-            {tab === 1 && (
-              <TextField
-                label="Your Company Name"
-                value={headerText}
-                onChange={e => setHeaderText(e.target.value)}
-                size="small"
-                sx={{ minWidth: 180, mx: 2 }}
-              />
-            )}
-            <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
-              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-          </Box>
-        )}
-      </Paper>
-      <TabPanel value={tab} index={0}>
-        <OperatorForm
-          sharedName={sharedName}
-          setSharedName={setSharedName}
-          form={operatorForm}
-          setForm={setOperatorForm}
-          companyName={headerText}
-        />
-      </TabPanel>
-      <TabPanel value={tab} index={1}>
-        <CustomerForm
-          sharedName={sharedName}
-          setSharedName={setSharedName}
-          form={customerForm}
-          setForm={setCustomerForm}
-          companyName={headerText}
-        />
-      </TabPanel>
-    </Container>
+          )}
+        </Paper>
+        <TabPanel value={tab} index={0}>
+          <OperatorForm
+            sharedName={sharedName}
+            setSharedName={setSharedName}
+            form={operatorForm}
+            setForm={setOperatorForm}
+            companyName={headerText}
+          />
+        </TabPanel>
+        <TabPanel value={tab} index={1}>
+          <CustomerForm
+            sharedName={sharedName}
+            setSharedName={setSharedName}
+            form={customerForm}
+            setForm={setCustomerForm}
+            companyName={headerText}
+          />
+        </TabPanel>
+      </Container>
+    </>
   );
 } 
