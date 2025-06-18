@@ -24,7 +24,10 @@
     "react-phone-input-2": "^2.15.1"
   },
   "browserslist": [
-    "defaults and supports es6-module",
+    "last 2 Chrome versions",
+    "last 2 Edge versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
     "not IE 11",
     "not op_mini all"
   ]
