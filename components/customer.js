@@ -22,7 +22,7 @@ import { useTheme } from "@mui/material/styles";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function Customer({ sharedName, setSharedName, form, setForm }) {
+export default function Customer({ sharedName, setSharedName, form, setForm, companyName }) {
   const [showConfirm, setShowConfirm] = React.useState(false);
   const [snackbar, setSnackbar] = React.useState({ open: false, message: "" });
   const theme = useTheme();
@@ -97,13 +97,14 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
   };
 
   const confirmationText = (fee) => {
+    const company = companyName && companyName.trim() ? companyName : 'Thailand Tours';
     const pickUpText = form.exTransfer
       ? `Pick up: ${form.pickUp} ( extra charge for private transfer ${form.exTransfer}THB )`
       : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
         `Hello ${sharedName || ""} ,\n\n` +
-        `Warm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\n` +
+        `Warm Greetings from ${company}\nThank you for choosing to book your trip with us!\n\n` +
         `We are pleased to confirm your booking, as detailed below.\n\n` +
         `Tour date:  ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY").replace(/(\d{2}) (\w{3}) (\d{4})/, (m, d, mon, y) => `${parseInt(d)} ${mon} ${y}`) : ""}\n` +
         `${pickUpText}\n` +
@@ -112,11 +113,11 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
         `The national park fee of THB ${form.feeAdult} per adult and THB ${form.feeChild} per child is excluded from the tour price. Please prepare cash for this fee. This fee is a maintenance fee collected by the Thai government department. There is no exception.\n\n` +
         `Should you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\n` +
         `We wish you a great day and a fantastic trip!\n\n` +
-        `Best Regards,\nThailand Tours team`
+        `Best Regards,\n${company} team`
       );
     }
-    let text = `Hello ${sharedName} ,\n\nWarm Greetings from Thailand Tours\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\n${pickUpText}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
-    text += `\n\n** Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible , please just call us if driver be later more than 10 mins**\n\nShould you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\nWe wish you a great day and a fantastic trip!\n\nBest Regards,\nThailand Tours team`;
+    let text = `Hello ${sharedName} ,\n\nWarm Greetings from ${company}\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\n${pickUpText}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
+    text += `\n\n** Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible , please just call us if driver be later more than 10 mins**\n\nShould you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\nWe wish you a great day and a fantastic trip!\n\nBest Regards,\n${company} team`;
     return text;
   };
 

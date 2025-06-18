@@ -103,6 +103,7 @@ export default function IndexPage() {
           setSharedName={setSharedName}
           form={operatorForm}
           setForm={setOperatorForm}
+          companyName={headerText}
         />
       </TabPanel>
       <TabPanel value={tab} index={1}>
@@ -111,6 +112,7 @@ export default function IndexPage() {
           setSharedName={setSharedName}
           form={customerForm}
           setForm={setCustomerForm}
+          companyName={headerText}
         />
       </TabPanel>
     </Container>
