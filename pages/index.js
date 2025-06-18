@@ -61,6 +61,21 @@ export default function IndexPage() {
   const [lastHotelSynced, setLastHotelSynced] = useState("");
   const { mode, handleToggle } = useContext(ThemeModeContext);
 
+  // Load company name from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('companyName');
+      if (saved) setHeaderText(saved);
+    }
+  }, []);
+
+  // Save company name to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('companyName', headerText);
+    }
+  }, [headerText]);
+
   useEffect(() => {
     if (
       operatorForm.addressOption !== 'sendLater' &&
