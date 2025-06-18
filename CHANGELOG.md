@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.7.0
+- The company name field in the header now only appears when the Customer Form tab is selected.
+- Confirmation output uses the company name value if set, otherwise defaults to "Thailand Tours".
+- Improved mobile responsiveness: header layout adapts for small screens, stacking elements vertically.
+
 ## v1.0.0 - Initial Release
 - Operator Form and Customer Form implemented as separate pages
 - Responsive, minimal UI with Material-UI (MUI)
