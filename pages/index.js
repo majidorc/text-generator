@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Container, Paper, Tabs, Tab, IconButton } from "@mui/material";
+import { Box, Container, Paper, Tabs, Tab, IconButton, TextField } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -25,6 +25,7 @@ function TabPanel({ children, value, index }) {
 export default function IndexPage() {
   const [tab, setTab] = useState(0);
   const [sharedName, setSharedName] = useState("");
+  const [headerText, setHeaderText] = useState("");
   // Operator form state
   const [operatorForm, setOperatorForm] = useState({
     bookingNumber: "",
@@ -84,6 +85,13 @@ export default function IndexPage() {
             <Tab label="Operator Form" />
             <Tab label="Customer Form" />
           </Tabs>
+          <TextField
+            label="Header Text"
+            value={headerText}
+            onChange={e => setHeaderText(e.target.value)}
+            size="small"
+            sx={{ minWidth: 180, mx: 2 }}
+          />
           <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
             {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
