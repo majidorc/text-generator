@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect, useMemo, useState, createContext } from "react";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const ThemeModeContext = createContext({ mode: "dark", handleToggle: () => {} });
 
@@ -59,6 +60,7 @@ export default function App({ Component, pageProps }) {
             <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
           </footer>
         </Box>
+        <SpeedInsights />
       </ThemeProvider>
     </ThemeModeContext.Provider>
   );
