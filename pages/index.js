@@ -89,14 +89,16 @@ export default function IndexPage() {
               <Tab label="Operator Form" />
               <Tab label="Customer Form" />
             </Tabs>
-            <TextField
-              label="Your Company Name"
-              value={headerText}
-              onChange={e => setHeaderText(e.target.value)}
-              size="small"
-              fullWidth
-              sx={{ mb: 1 }}
-            />
+            {tab === 1 && (
+              <TextField
+                label="Your Company Name"
+                value={headerText}
+                onChange={e => setHeaderText(e.target.value)}
+                size="small"
+                fullWidth
+                sx={{ mb: 1 }}
+              />
+            )}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
                 {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -116,13 +118,15 @@ export default function IndexPage() {
               <Tab label="Operator Form" />
               <Tab label="Customer Form" />
             </Tabs>
-            <TextField
-              label="Your Company Name"
-              value={headerText}
-              onChange={e => setHeaderText(e.target.value)}
-              size="small"
-              sx={{ minWidth: 180, mx: 2 }}
-            />
+            {tab === 1 && (
+              <TextField
+                label="Your Company Name"
+                value={headerText}
+                onChange={e => setHeaderText(e.target.value)}
+                size="small"
+                sx={{ minWidth: 180, mx: 2 }}
+              />
+            )}
             <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
               {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
