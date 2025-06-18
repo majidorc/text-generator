@@ -42,6 +42,9 @@
 - Improved copy/share button for confirmation output
 - Phone input improvements (with country flag)
 
+## v1.6.1
+- Fix: Customer form confirmation output now always shows the Name after 'Hello'.
+
 ---
 
 For a full commit history, see the [GitHub repo](https://github.com/majidorc/text-generator/commits/main). 
