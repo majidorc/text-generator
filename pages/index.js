@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Container, Paper, Tabs, Tab, IconButton, TextField } from "@mui/material";
+import { Box, Container, Paper, Tabs, Tab, IconButton, TextField, useMediaQuery } from "@mui/material";
 import dynamic from "next/dynamic";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -7,6 +7,7 @@ import timezone from "dayjs/plugin/timezone";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { ThemeModeContext } from "./_app";
+import { useTheme } from "@mui/material/styles";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -26,6 +27,8 @@ export default function IndexPage() {
   const [tab, setTab] = useState(0);
   const [sharedName, setSharedName] = useState("");
   const [headerText, setHeaderText] = useState("");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   // Operator form state
   const [operatorForm, setOperatorForm] = useState({
     bookingNumber: "",
@@ -73,29 +76,58 @@ export default function IndexPage() {
   return (
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Paper sx={{ p: 2, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Tabs
-            value={tab}
-            onChange={(_, v) => setTab(v)}
-            textColor="inherit"
-            indicatorColor="secondary"
-            centered
-            sx={{ flex: 1 }}
-          >
-            <Tab label="Operator Form" />
-            <Tab label="Customer Form" />
-          </Tabs>
-          <TextField
-            label="Your Company Name"
-            value={headerText}
-            onChange={e => setHeaderText(e.target.value)}
-            size="small"
-            sx={{ minWidth: 180, mx: 2 }}
-          />
-          <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
-            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
-        </Box>
+        {isMobile ? (
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Tabs
+              value={tab}
+              onChange={(_, v) => setTab(v)}
+              textColor="inherit"
+              indicatorColor="secondary"
+              centered
+              sx={{ mb: 1 }}
+            >
+              <Tab label="Operator Form" />
+              <Tab label="Customer Form" />
+            </Tabs>
+            <TextField
+              label="Your Company Name"
+              value={headerText}
+              onChange={e => setHeaderText(e.target.value)}
+              size="small"
+              fullWidth
+              sx={{ mb: 1 }}
+            />
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
+                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
+            </Box>
+          </Box>
+        ) : (
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Tabs
+              value={tab}
+              onChange={(_, v) => setTab(v)}
+              textColor="inherit"
+              indicatorColor="secondary"
+              centered
+              sx={{ flex: 1 }}
+            >
+              <Tab label="Operator Form" />
+              <Tab label="Customer Form" />
+            </Tabs>
+            <TextField
+              label="Your Company Name"
+              value={headerText}
+              onChange={e => setHeaderText(e.target.value)}
+              size="small"
+              sx={{ minWidth: 180, mx: 2 }}
+            />
+            <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
+              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+          </Box>
+        )}
       </Paper>
       <TabPanel value={tab} index={0}>
         <OperatorForm
