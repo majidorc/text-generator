@@ -54,6 +54,9 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
       }
     } else if (name === "hotel") {
       setForm((prev) => ({ ...prev, hotel: value }));
+    } else if (name === "withTransferText") {
+      setForm((prev) => ({ ...prev, withTransferText: value, pickUp: value }));
+      return;
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
@@ -258,7 +261,24 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                   control={<Radio sx={{ color: "text.primary" }} />}
                   label={<span style={{ fontSize: 14, fontWeight: 400 }}>Send Later</span>}
                 />
+                <FormControlLabel
+                  value="withTransfer"
+                  control={<Radio sx={{ color: "text.primary" }} />}
+                  label={<span style={{ fontSize: 14, fontWeight: 400 }}>With Transfer</span>}
+                />
               </RadioGroup>
+              {form.addressOption === 'withTransfer' && (
+                <TextField
+                  fullWidth
+                  label="Transfer Details"
+                  name="withTransferText"
+                  value={form.withTransferText || ''}
+                  onChange={handleChange}
+                  variant="outlined"
+                  sx={{ bgcolor: "background.default", mt: 2 }}
+                  autoComplete="off"
+                />
+              )}
             </Grid>
             <Grid item xs={12} md={3}>
               <PhoneInput

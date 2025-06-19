@@ -165,7 +165,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
               fullWidth
               label="Pick up :"
               name="pickUp"
-              value={form.pickUp}
+              value={form.withTransferText || form.pickUp}
               onChange={handleChange}
               variant="outlined"
               sx={{ bgcolor: "background.default" }}
