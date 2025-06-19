@@ -267,18 +267,6 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
                   label={<span style={{ fontSize: 14, fontWeight: 400 }}>With Transfer</span>}
                 />
               </RadioGroup>
-              {form.addressOption === 'withTransfer' && (
-                <TextField
-                  fullWidth
-                  label="Transfer Details"
-                  name="withTransferText"
-                  value={form.withTransferText || ''}
-                  onChange={handleChange}
-                  variant="outlined"
-                  sx={{ bgcolor: "background.default", mt: 2 }}
-                  autoComplete="off"
-                />
-              )}
             </Grid>
             <Grid item xs={12} md={3}>
               <PhoneInput
