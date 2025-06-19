@@ -137,7 +137,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Tour Date"
-                value={selectedDate}
+                value={selectedDate || null}
                 onChange={(newValue) => setSelectedDate(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "background.default" }} />

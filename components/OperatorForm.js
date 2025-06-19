@@ -216,7 +216,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Tour Date"
-                  value={selectedDate}
+                  value={selectedDate || null}
                   onChange={(newValue) => setSelectedDate(newValue)}
                   renderInput={(params) => (
                     <TextField {...params} fullWidth required variant="outlined" sx={{ bgcolor: "background.default" }} autoComplete="off" />
