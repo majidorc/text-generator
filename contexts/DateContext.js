@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from 'react';
 import { addDays } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 const DateContext = createContext();
 
 export function DateProvider({ children }) {
   // Get tomorrow's date in Bangkok timezone
-  const tomorrow = addDays(utcToZonedTime(new Date(), 'Asia/Bangkok'), 1);
+  const tomorrow = addDays(new Date(), 1);
   const [selectedDate, setSelectedDate] = useState(tomorrow);
 
   return (
