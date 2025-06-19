@@ -137,11 +137,15 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Tour Date"
-                value={selectedDate || null}
-                onChange={(newValue) => setSelectedDate(newValue)}
-                renderInput={(params) => (
-                  <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "background.default" }} />
-                )}
+                value={selectedDate}
+                onChange={(newValue) => setSelectedDate(dayjs(newValue))}
+                slotProps={{
+                  textField: {
+                    fullWidth: true,
+                    variant: "outlined",
+                    sx: { bgcolor: "background.default" }
+                  }
+                }}
               />
             </LocalizationProvider>
           </Grid>

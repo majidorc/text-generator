@@ -1,6 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { addDays } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const DateContext = createContext();
 
@@ -10,7 +14,7 @@ export function DateProvider({ children }) {
 
   // Set the initial date on the client side only
   useEffect(() => {
-    const tomorrow = addDays(new Date(), 1);
+    const tomorrow = dayjs().tz('Asia/Bangkok').add(1, 'day');
     setSelectedDate(tomorrow);
   }, []);
 
