@@ -18,11 +18,13 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { useTheme } from "@mui/material/styles";
+import { useDate } from '../contexts/DateContext';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export default function Customer({ sharedName, setSharedName, form, setForm, companyName }) {
+  const { selectedDate, setSelectedDate } = useDate();
   const [showConfirm, setShowConfirm] = React.useState(false);
   const [snackbar, setSnackbar] = React.useState({ open: false, message: "" });
   const theme = useTheme();
@@ -56,7 +58,13 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
   };
 
   const handleSubmit = (fee) => {
-    setForm((prev) => ({ ...prev, withFee: fee, showFeeFields: fee }));
+    const formData = {
+      ...form,
+      tourDate: selectedDate,
+      withFee: fee,
+      showFeeFields: fee
+    };
+    setForm(formData);
     setShowConfirm(true);
     navigator.clipboard.writeText(confirmationText(fee));
     setSnackbar({ open: true, message: "Copied to clipboard!" });
@@ -128,9 +136,9 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
           <Grid item xs={12} md={3}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                label="tour Date :"
-                value={form.tourDate}
-                onChange={handleDateChange}
+                label="Tour Date"
+                value={selectedDate}
+                onChange={(newValue) => setSelectedDate(newValue)}
                 renderInput={(params) => (
                   <TextField {...params} fullWidth variant="outlined" sx={{ bgcolor: "background.default" }} />
                 )}

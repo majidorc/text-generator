@@ -7,6 +7,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../createEmotionCache';
+import { DateProvider } from '../contexts/DateContext';
 
 export const ThemeModeContext = createContext({ mode: "dark", handleToggle: () => {} });
 
@@ -52,22 +53,24 @@ export default function App({ Component, pageProps, emotionCache = clientSideEmo
   };
 
   return (
-    <CacheProvider value={emotionCache}>
-      <ThemeModeContext.Provider value={{ mode, handleToggle }}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ flex: 1 }}>
-              <Component {...pageProps} />
+    <DateProvider>
+      <CacheProvider value={emotionCache}>
+        <ThemeModeContext.Provider value={{ mode, handleToggle }}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+              <Box sx={{ flex: 1 }}>
+                <Component {...pageProps} />
+              </Box>
+              <footer style={{ textAlign: 'center', padding: '16px 0', background: theme.palette.background.paper, color: theme.palette.text.primary, fontSize: 16 }}>
+                <span role="img" aria-label="love" style={{ fontSize: 18, verticalAlign: 'middle', marginRight: 4 }}>❤️</span>
+                <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
+              </footer>
             </Box>
-            <footer style={{ textAlign: 'center', padding: '16px 0', background: theme.palette.background.paper, color: theme.palette.text.primary, fontSize: 16 }}>
-              <span role="img" aria-label="love" style={{ fontSize: 18, verticalAlign: 'middle', marginRight: 4 }}>❤️</span>
-              <a href="https://tours.co.th" target="_blank" rel="noopener noreferrer" style={{ color: '#7ecbff', textDecoration: 'none', fontWeight: 500 }}>Tours.co.th</a>
-            </footer>
-          </Box>
-          <SpeedInsights />
-        </ThemeProvider>
-      </ThemeModeContext.Provider>
-    </CacheProvider>
+            <SpeedInsights />
+          </ThemeProvider>
+        </ThemeModeContext.Provider>
+      </CacheProvider>
+    </DateProvider>
   );
 } 

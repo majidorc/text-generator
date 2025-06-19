@@ -26,11 +26,13 @@ import "react-phone-input-2/lib/material.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
+import { useDate } from '../contexts/DateContext';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export default function OperatorForm({ sharedName, setSharedName, form, setForm }) {
+  const { selectedDate, setSelectedDate } = useDate();
   const [showConfirm, setShowConfirm] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: "" });
   const theme = useTheme();
@@ -65,8 +67,14 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
     setForm((prev) => ({ ...prev, tourDate: date }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = {
+      ...form,
+      tourDate: selectedDate,
+    };
+    // Update form state with the latest data
+    setForm(formData);
     setShowConfirm(true);
     navigator.clipboard.writeText(confirmationText);
     setSnackbar({ open: true, message: "Copied to clipboard!" });
@@ -208,8 +216,8 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label="Tour Date"
-                  value={form.tourDate}
-                  onChange={handleDateChange}
+                  value={selectedDate}
+                  onChange={(newValue) => setSelectedDate(newValue)}
                   renderInput={(params) => (
                     <TextField {...params} fullWidth required variant="outlined" sx={{ bgcolor: "background.default" }} autoComplete="off" />
                   )}
