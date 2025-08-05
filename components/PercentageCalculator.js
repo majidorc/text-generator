@@ -1,265 +1,189 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
-  Paper,
   Typography,
   TextField,
-  Button,
   Grid,
   Card,
   CardContent,
-  Divider,
-  Alert,
   IconButton,
-  Tooltip
+  Tooltip,
+  Alert
 } from '@mui/material';
 import {
-  Calculate as CalculateIcon,
-  Clear as ClearIcon,
+  Help as HelpIcon,
   ContentCopy as CopyIcon
 } from '@mui/icons-material';
 
 const PercentageCalculator = () => {
-  const [calculations, setCalculations] = useState({
-    // Basic percentage calculation
-    basic: {
-      value: '',
-      percentage: '',
-      result: ''
-    },
-    // Percentage of a number
-    percentageOf: {
-      number: '',
-      percentage: '',
-      result: ''
-    },
-    // Percentage change
-    percentageChange: {
-      oldValue: '',
-      newValue: '',
-      result: ''
-    },
-    // Percentage increase/decrease
-    percentageIncrease: {
-      originalValue: '',
-      percentage: '',
-      result: ''
-    }
+  const [values, setValues] = useState({
+    retailPrice: '',
+    amountPaid: '',
+    commissionRate: ''
   });
 
-  const [activeCalculation, setActiveCalculation] = useState('basic');
+  const [activeField, setActiveField] = useState('retailPrice');
 
-  const calculateBasic = () => {
-    const { value, percentage } = calculations.basic;
-    if (value && percentage) {
-      const result = (parseFloat(value) * parseFloat(percentage)) / 100;
-      setCalculations(prev => ({
+  // Calculate amount paid when retail price and commission rate change
+  useEffect(() => {
+    if (values.retailPrice && values.commissionRate) {
+      const retail = parseFloat(values.retailPrice);
+      const commission = parseFloat(values.commissionRate);
+      const commissionAmount = retail * (commission / 100);
+      const amountPaid = retail - commissionAmount;
+      setValues(prev => ({
         ...prev,
-        basic: { ...prev.basic, result: result.toFixed(2) }
+        amountPaid: amountPaid.toFixed(2)
       }));
     }
-  };
+  }, [values.retailPrice, values.commissionRate]);
 
-  const calculatePercentageOf = () => {
-    const { number, percentage } = calculations.percentageOf;
-    if (number && percentage) {
-      const result = (parseFloat(number) * parseFloat(percentage)) / 100;
-      setCalculations(prev => ({
+  // Calculate commission rate when retail price and amount paid change
+  useEffect(() => {
+    if (values.retailPrice && values.amountPaid && activeField === 'amountPaid') {
+      const retail = parseFloat(values.retailPrice);
+      const paid = parseFloat(values.amountPaid);
+      const commissionAmount = retail - paid;
+      const commissionRate = (commissionAmount / retail) * 100;
+      setValues(prev => ({
         ...prev,
-        percentageOf: { ...prev.percentageOf, result: result.toFixed(2) }
+        commissionRate: commissionRate.toFixed(2)
       }));
     }
-  };
+  }, [values.retailPrice, values.amountPaid, activeField]);
 
-  const calculatePercentageChange = () => {
-    const { oldValue, newValue } = calculations.percentageChange;
-    if (oldValue && newValue) {
-      const old = parseFloat(oldValue);
-      const newVal = parseFloat(newValue);
-      const change = ((newVal - old) / old) * 100;
-      setCalculations(prev => ({
+  // Calculate retail price when amount paid and commission rate change
+  useEffect(() => {
+    if (values.amountPaid && values.commissionRate && activeField === 'retailPrice') {
+      const paid = parseFloat(values.amountPaid);
+      const commission = parseFloat(values.commissionRate);
+      const retailPrice = paid / (1 - commission / 100);
+      setValues(prev => ({
         ...prev,
-        percentageChange: { ...prev.percentageChange, result: change.toFixed(2) }
+        retailPrice: retailPrice.toFixed(2)
       }));
     }
-  };
+  }, [values.amountPaid, values.commissionRate, activeField]);
 
-  const calculatePercentageIncrease = () => {
-    const { originalValue, percentage } = calculations.percentageIncrease;
-    if (originalValue && percentage) {
-      const original = parseFloat(originalValue);
-      const percent = parseFloat(percentage);
-      const result = original + (original * percent / 100);
-      setCalculations(prev => ({
-        ...prev,
-        percentageIncrease: { ...prev.percentageIncrease, result: result.toFixed(2) }
-      }));
-    }
-  };
-
-  const handleInputChange = (calculationType, field, value) => {
-    setCalculations(prev => ({
+  const handleInputChange = (field, value) => {
+    setActiveField(field);
+    setValues(prev => ({
       ...prev,
-      [calculationType]: {
-        ...prev[calculationType],
-        [field]: value
-      }
+      [field]: value
     }));
   };
 
-  const clearCalculation = (calculationType) => {
-    setCalculations(prev => ({
-      ...prev,
-      [calculationType]: {
-        ...prev[calculationType],
-        value: '',
-        percentage: '',
-        result: '',
-        number: '',
-        oldValue: '',
-        newValue: '',
-        originalValue: ''
-      }
-    }));
-  };
-
-  const copyResult = (result) => {
-    if (result) {
-      navigator.clipboard.writeText(result);
+  const copyValue = (value) => {
+    if (value) {
+      navigator.clipboard.writeText(`THB ${value}`);
     }
   };
 
-  const calculationTypes = [
+  const formatCurrency = (value) => {
+    if (!value) return '';
+    return `THB ${parseFloat(value).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}`;
+  };
+
+  const fields = [
     {
-      key: 'basic',
-      title: 'Basic Percentage',
-      description: 'Calculate X% of a number',
-      fields: [
-        { name: 'value', label: 'Number', type: 'number' },
-        { name: 'percentage', label: 'Percentage (%)', type: 'number' }
-      ],
-      calculate: calculateBasic,
-      resultLabel: 'Result'
+      key: 'retailPrice',
+      label: 'Suggested retail price',
+      tooltip: 'Enter the suggested retail price in THB',
+      format: formatCurrency,
+      suffix: 'THB'
     },
     {
-      key: 'percentageOf',
-      title: 'Percentage of Number',
-      description: 'What percentage is X of Y',
-      fields: [
-        { name: 'number', label: 'Number', type: 'number' },
-        { name: 'percentage', label: 'Percentage (%)', type: 'number' }
-      ],
-      calculate: calculatePercentageOf,
-      resultLabel: 'Result'
+      key: 'amountPaid',
+      label: 'Amount you will get paid',
+      tooltip: 'The amount you will receive after commission',
+      format: formatCurrency,
+      suffix: 'THB'
     },
     {
-      key: 'percentageChange',
-      title: 'Percentage Change',
-      description: 'Calculate percentage increase/decrease',
-      fields: [
-        { name: 'oldValue', label: 'Old Value', type: 'number' },
-        { name: 'newValue', label: 'New Value', type: 'number' }
-      ],
-      calculate: calculatePercentageChange,
-      resultLabel: 'Percentage Change (%)'
-    },
-    {
-      key: 'percentageIncrease',
-      title: 'Percentage Increase/Decrease',
-      description: 'Add/subtract percentage to a value',
-      fields: [
-        { name: 'originalValue', label: 'Original Value', type: 'number' },
-        { name: 'percentage', label: 'Percentage (%)', type: 'number' }
-      ],
-      calculate: calculatePercentageIncrease,
-      resultLabel: 'Final Value'
+      key: 'commissionRate',
+      label: 'Commission rate',
+      tooltip: 'Enter the commission rate as a percentage',
+      format: (value) => value ? `${value}%` : '',
+      suffix: '%'
     }
   ];
 
   return (
     <Box sx={{ p: 2 }}>
       <Typography variant="h4" gutterBottom sx={{ mb: 3, textAlign: 'center' }}>
-        Percentage Calculator
+        Commission Calculator
       </Typography>
       
       <Grid container spacing={3}>
-        {calculationTypes.map((calc) => (
-          <Grid item xs={12} md={6} key={calc.key}>
+        {fields.map((field) => (
+          <Grid item xs={12} md={4} key={field.key}>
             <Card 
               sx={{ 
                 height: '100%',
-                cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   boxShadow: 3
-                },
-                border: activeCalculation === calc.key ? 2 : 1,
-                borderColor: activeCalculation === calc.key ? 'primary.main' : 'divider'
+                }
               }}
-              onClick={() => setActiveCalculation(calc.key)}
             >
               <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {calc.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  {calc.description}
-                </Typography>
-                
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {calc.fields.map((field) => (
-                    <TextField
-                      key={field.name}
-                      label={field.label}
-                      type={field.type}
-                      value={calculations[calc.key][field.name]}
-                      onChange={(e) => handleInputChange(calc.key, field.name, e.target.value)}
-                      fullWidth
-                      size="small"
-                    />
-                  ))}
-                  
-                  <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
-                    <Button
-                      variant="contained"
-                      startIcon={<CalculateIcon />}
-                      onClick={calc.calculate}
-                      fullWidth
-                    >
-                      Calculate
-                    </Button>
-                    <Tooltip title="Clear">
-                      <IconButton
-                        onClick={() => clearCalculation(calc.key)}
-                        color="secondary"
-                      >
-                        <ClearIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
-                  
-                  {calculations[calc.key].result && (
-                    <Alert 
-                      severity="success" 
-                      sx={{ mt: 2 }}
-                      action={
-                        <Tooltip title="Copy result">
-                          <IconButton
-                            size="small"
-                            onClick={() => copyResult(calculations[calc.key].result)}
-                          >
-                            <CopyIcon />
-                          </IconButton>
-                        </Tooltip>
-                      }
-                    >
-                      <Typography variant="body2">
-                        <strong>{calc.resultLabel}:</strong> {calculations[calc.key].result}
-                      </Typography>
-                    </Alert>
-                  )}
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                  <Typography variant="h6" sx={{ flex: 1 }}>
+                    {field.label}
+                  </Typography>
+                  <Tooltip title={field.tooltip}>
+                    <IconButton size="small">
+                      <HelpIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Box>
+                
+                <TextField
+                  label={field.label}
+                  type="number"
+                  value={values[field.key]}
+                  onChange={(e) => handleInputChange(field.key, e.target.value)}
+                  fullWidth
+                  size="small"
+                  sx={{ mb: 2 }}
+                  InputProps={{
+                    startAdornment: field.key !== 'commissionRate' ? (
+                      <Typography variant="body2" sx={{ mr: 1, color: 'text.secondary' }}>
+                        THB
+                      </Typography>
+                    ) : null,
+                    endAdornment: field.key === 'commissionRate' ? (
+                      <Typography variant="body2" sx={{ ml: 1, color: 'text.secondary' }}>
+                        %
+                      </Typography>
+                    ) : null
+                  }}
+                />
+                
+                {values[field.key] && (
+                  <Alert 
+                    severity="success" 
+                    sx={{ mb: 1 }}
+                    action={
+                      <Tooltip title="Copy value">
+                        <IconButton
+                          size="small"
+                          onClick={() => copyValue(values[field.key])}
+                        >
+                          <CopyIcon />
+                        </IconButton>
+                      </Tooltip>
+                    }
+                  >
+                    <Typography variant="body2">
+                      {field.format(values[field.key])}
+                    </Typography>
+                  </Alert>
+                )}
               </CardContent>
             </Card>
           </Grid>
@@ -268,12 +192,13 @@ const PercentageCalculator = () => {
       
       <Box sx={{ mt: 4, p: 2, bgcolor: 'background.paper', borderRadius: 1 }}>
         <Typography variant="h6" gutterBottom>
-          Quick Tips
+          How it works
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          • Use positive percentages for increases, negative for decreases
-          • The percentage change calculation shows the relative change between two values
-          • All results are rounded to 2 decimal places for precision
+          • Enter any two values to calculate the third
+          • Commission rate is automatically calculated as a percentage
+          • All amounts are displayed in Thai Baht (THB)
+          • Click the copy icon to copy values to clipboard
         </Typography>
       </Box>
     </Box>
