@@ -64,13 +64,6 @@ const PercentageCalculator = () => {
 
   const fields = [
     {
-      key: 'retailPrice',
-      label: 'Suggested retail price',
-      tooltip: 'Enter the suggested retail price in THB',
-      format: formatCurrency,
-      suffix: 'THB'
-    },
-    {
       key: 'amountPaid',
       label: 'Amount you will get paid',
       tooltip: 'The amount you will receive after commission',
@@ -83,6 +76,13 @@ const PercentageCalculator = () => {
       tooltip: 'Enter the commission rate as a percentage',
       format: (value) => value ? `${value}%` : '',
       suffix: '%'
+    },
+    {
+      key: 'retailPrice',
+      label: 'Suggested retail price',
+      tooltip: 'Calculated retail price (read-only)',
+      format: formatCurrency,
+      suffix: 'THB'
     }
   ];
 
@@ -92,21 +92,12 @@ const PercentageCalculator = () => {
         Commission Calculator
       </Typography>
       
-      <Grid container spacing={3}>
-        {fields.map((field) => (
-          <Grid item xs={12} md={4} key={field.key}>
-            <Card 
-              sx={{ 
-                height: '100%',
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: 3
-                }
-              }}
-            >
-              <CardContent>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+      <Card sx={{ maxWidth: 600, mx: 'auto' }}>
+        <CardContent>
+          <Grid container spacing={3}>
+            {fields.map((field) => (
+              <Grid item xs={12} key={field.key}>
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                   <Typography variant="h6" sx={{ flex: 1 }}>
                     {field.label}
                   </Typography>
@@ -140,12 +131,12 @@ const PercentageCalculator = () => {
                   }}
                 />
                 
-                {values[field.key] && (
+                {values[field.key] && field.key === 'retailPrice' && (
                   <Alert 
                     severity="success" 
                     sx={{ mb: 1 }}
                     action={
-                      <Tooltip title="Copy value">
+                      <Tooltip title="Copy retail price">
                         <IconButton
                           size="small"
                           onClick={() => copyValue(values[field.key])}
@@ -160,13 +151,11 @@ const PercentageCalculator = () => {
                     </Typography>
                   </Alert>
                 )}
-              </CardContent>
-            </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      
-
+        </CardContent>
+      </Card>
     </Box>
   );
 };
