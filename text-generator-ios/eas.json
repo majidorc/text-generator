@@ -10,19 +10,9 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {
-      "ios": {
-        "resourceClass": "m-medium"
-      }
-    }
+    "production": {}
   },
   "submit": {
-    "production": {
-      "ios": {
-        "appleId": "your-apple-id@example.com",
-        "ascAppId": "your-app-store-connect-app-id",
-        "appleTeamId": "your-apple-team-id"
-      }
-    }
+    "production": {}
   }
 } 

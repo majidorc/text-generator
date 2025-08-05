@@ -1,87 +1,118 @@
 # EAS Build Troubleshooting Guide
 
-## 🔧 **Build Failed - Common Solutions**
+## 🔧 **Build Failed - "exited with non-zero code: 1"**
 
-### **Issue: "exited with non-zero code: 1"**
+This error usually indicates a configuration or dependency issue.
 
-This usually means there's a configuration or dependency issue.
+## 🚀 **Step-by-Step Fix:**
 
-## 🚀 **Quick Fix Steps:**
-
-### **Step 1: Try the Simplified Version**
-I've created a simplified `App.js` and `package.json` for testing.
-
-### **Step 2: Check EAS Configuration**
+### **Step 1: Check EAS Login**
 ```bash
-# Make sure you're logged in
+# Make sure you're logged in to Expo
 eas login
-
-# Check your project configuration
-eas build:configure
 ```
 
-### **Step 3: Try Different Build Profile**
+### **Step 2: Try Development Build First**
 ```bash
-# Try development build first
+# Development builds are more forgiving
 eas build --platform ios --profile development
+```
 
-# If that works, try production
+### **Step 3: If Development Works, Try Production**
+```bash
+# Only try production after development succeeds
 eas build --platform ios --profile production
 ```
 
 ### **Step 4: Check Build Logs**
-- Go to https://expo.dev/
-- Find your project
-- Check the build logs for specific errors
+1. Go to https://expo.dev/
+2. Find your project
+3. Click on the failed build
+4. Check the detailed logs for specific errors
 
 ## 🔍 **Common Issues & Solutions:**
 
-### **Issue 1: Missing Dependencies**
-**Solution:** The simplified `package.json` should fix this.
+### **Issue 1: Missing Assets**
+**Solution:** Removed icon and splash references from app.json
 
-### **Issue 2: Navigation Setup**
-**Solution:** Simplified `App.js` removes navigation complexity.
+### **Issue 2: EAS Configuration**
+**Solution:** Simplified eas.json to basic configuration
 
-### **Issue 3: Metro Configuration**
-**Solution:** Added `metro.config.js` file.
+### **Issue 3: Dependencies**
+**Solution:** Using minimal package.json with only essential packages
 
 ### **Issue 4: Babel Configuration**
-**Solution:** Added `babel-preset-expo` to devDependencies.
+**Solution:** Updated babel.config.js with explicit plugins array
 
-## 📱 **Test Build Commands:**
+## 📱 **Alternative Approaches:**
 
+### **Option A: Use Expo's Web Interface**
+1. Go to https://expo.dev/
+2. Create new project
+3. Import from GitHub: `majidorc/text-generator`
+4. Select `text-generator-ios` folder
+5. Build via web interface
+
+### **Option B: Try Different EAS Commands**
 ```bash
-# 1. Test with simplified version
-eas build --platform ios --profile development
+# Initialize EAS properly
+eas build:configure
 
-# 2. If successful, try production
-eas build --platform ios --profile production
+# Try with explicit platform
+eas build --platform ios --clear-cache
 
-# 3. If still failing, check logs
-# Go to https://expo.dev/ and check build logs
+# Try with different profile
+eas build --platform ios --profile preview
 ```
 
-## 🔄 **If Simplified Version Works:**
+### **Option C: Check Project Structure**
+```bash
+# Make sure you're in the right directory
+cd text-generator-ios
 
-Once the simplified version builds successfully, we can gradually add back:
-1. Navigation components
-2. React Native Paper
-3. Commission Calculator
-4. Other features
+# Check if all files exist
+ls -la
 
-## 📋 **Next Steps:**
+# Verify package.json
+cat package.json
+```
 
-1. **Try the simplified build** (current setup)
-2. **Check build logs** for specific errors
-3. **Gradually add features** back once basic build works
-4. **Test on device** with Expo Go app
+## 🔄 **If Still Failing:**
 
-## 🆘 **Still Having Issues?**
+### **Step 1: Check Specific Error**
+- Look at the build logs for the exact error message
+- Common errors: missing dependencies, syntax errors, configuration issues
 
-1. **Check Expo documentation**: https://docs.expo.dev/build/setup/
-2. **Join Expo Discord**: https://discord.gg/expo
-3. **Check build logs** for specific error messages
+### **Step 2: Try Minimal Test**
+- The current App.js is minimal
+- If this fails, the issue is with project setup, not code
+
+### **Step 3: Verify EAS Project**
+- Make sure project ID is correct: `84b62730-f0e5-4b9f-a9cd-f810835903ed`
+- Check if project exists in Expo dashboard
+
+## 📋 **Current Setup:**
+
+✅ **Simplified Configuration:**
+- Minimal app.json (no assets)
+- Basic eas.json
+- Simple App.js
+- Essential dependencies only
+
+✅ **Files Ready:**
+- App.js - Basic "Hello World"
+- package.json - Minimal dependencies
+- babel.config.js - Basic configuration
+- metro.config.js - Metro setup
+- .expo/settings.json - Expo settings
+
+## 🆘 **Next Steps:**
+
+1. **Try development build first**
+2. **Check build logs for specific errors**
+3. **Try Expo web interface if command line fails**
+4. **Contact Expo support if still failing**
 
 ---
 
-**Current Status:** Simplified version ready for testing 
+**Current Status:** Minimal configuration ready for testing 
