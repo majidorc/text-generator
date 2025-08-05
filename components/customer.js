@@ -108,9 +108,11 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
 
   const confirmationText = (fee) => {
     const company = companyName && companyName.trim() ? companyName : 'Thailand Tours';
-    const transferType = form.transferPerPerson ? 'per person' : 'private';
+    const transferText = form.transferPerPerson 
+      ? `extra charge for roundtrip transfer ${form.exTransfer}THB per person`
+      : `extra charge for Private Roundtrip transfer ${form.exTransfer}THB`;
     const pickUpText = form.exTransfer
-      ? `Pick up: ${form.pickUp} ( extra charge for roundtrip transfer ${form.exTransfer}THB ${transferType} )`
+      ? `Pick up: ${form.pickUp} ( ${transferText} )`
       : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
