@@ -7,6 +7,7 @@ import timezone from "dayjs/plugin/timezone";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import CalculateIcon from "@mui/icons-material/Calculate";
+import ClearIcon from "@mui/icons-material/Clear";
 import { ThemeModeContext } from "./_app";
 import { useTheme } from "@mui/material/styles";
 import Head from 'next/head';
@@ -63,6 +64,15 @@ export default function IndexPage() {
   // Track last hotel value synced to pickUp
   const [lastHotelSynced, setLastHotelSynced] = useState("");
   const { mode, handleToggle } = useContext(ThemeModeContext);
+
+  const handleClearCache = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+      sessionStorage.clear();
+      // Reload the page to clear all cached data
+      window.location.reload();
+    }
+  };
 
   // Load company name from localStorage on mount
   useEffect(() => {
@@ -123,7 +133,10 @@ export default function IndexPage() {
                   sx={{ mb: 1 }}
                 />
               )}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+                <IconButton onClick={handleClearCache} color="inherit" aria-label="clear cache" title="Clear Cache">
+                  <ClearIcon />
+                </IconButton>
                 <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
                   {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
@@ -152,9 +165,14 @@ export default function IndexPage() {
                   sx={{ minWidth: 180, mx: 2 }}
                 />
               )}
-              <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode" sx={{ ml: 2 }}>
-                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-              </IconButton>
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <IconButton onClick={handleClearCache} color="inherit" aria-label="clear cache" title="Clear Cache">
+                  <ClearIcon />
+                </IconButton>
+                <IconButton onClick={handleToggle} color="inherit" aria-label="toggle dark mode">
+                  {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+              </Box>
             </Box>
           )}
         </Paper>
