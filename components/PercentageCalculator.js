@@ -11,7 +11,6 @@ import {
   Alert
 } from '@mui/material';
 import {
-  Help as HelpIcon,
   ContentCopy as CopyIcon
 } from '@mui/icons-material';
 
@@ -64,18 +63,18 @@ const PercentageCalculator = () => {
 
   const fields = [
     {
-      key: 'amountPaid',
-      label: 'Amount you will get paid',
-      tooltip: 'The amount you will receive after commission',
-      format: formatCurrency,
-      suffix: 'THB'
-    },
-    {
       key: 'commissionRate',
       label: 'Commission rate',
       tooltip: 'Enter the commission rate as a percentage',
       format: (value) => value ? `${value}%` : '',
       suffix: '%'
+    },
+    {
+      key: 'amountPaid',
+      label: 'Amount you will get paid',
+      tooltip: 'The amount you will receive after commission',
+      format: formatCurrency,
+      suffix: 'THB'
     },
     {
       key: 'retailPrice',
@@ -97,16 +96,9 @@ const PercentageCalculator = () => {
           <Grid container spacing={3}>
             {fields.map((field) => (
               <Grid item xs={12} key={field.key}>
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                  <Typography variant="h6" sx={{ flex: 1 }}>
-                    {field.label}
-                  </Typography>
-                  <Tooltip title={field.tooltip}>
-                    <IconButton size="small">
-                      <HelpIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
+                <Typography variant="h6" sx={{ mb: 1 }}>
+                  {field.label}
+                </Typography>
                 
                 <TextField
                   label={field.label}
