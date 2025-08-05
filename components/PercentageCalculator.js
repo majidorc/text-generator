@@ -189,19 +189,7 @@ const PercentageCalculator = () => {
         ))}
       </Grid>
       
-      <Box sx={{ mt: 4, p: 2, bgcolor: 'background.paper', borderRadius: 1 }}>
-        <Typography variant="h6" gutterBottom>
-          How it works
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          • Enter any two values to calculate the third automatically
-          • You can start with commission rate + amount paid → calculates retail price
-          • Or start with retail price + commission rate → calculates amount paid
-          • Or start with retail price + amount paid → calculates commission rate
-          • All amounts are displayed in Thai Baht (THB)
-          • Click the copy icon to copy values to clipboard
-        </Typography>
-      </Box>
+
     </Box>
   );
 };
