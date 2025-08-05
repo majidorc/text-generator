@@ -52,7 +52,7 @@ const PercentageCalculator = () => {
           commissionRate: commissionRate.toFixed(2)
         }));
       } else if (amountPaid && commissionRate && !retailPrice) {
-        // Calculate retail price
+        // Calculate retail price: amount paid / (1 - commission rate/100)
         const paid = parseFloat(amountPaid);
         const commission = parseFloat(commissionRate);
         const retailPrice = paid / (1 - commission / 100);
