@@ -8,7 +8,9 @@ import {
   CardContent,
   IconButton,
   Tooltip,
-  Alert
+  Alert,
+  Button,
+  ButtonGroup
 } from '@mui/material';
 import {
   ContentCopy as CopyIcon
@@ -47,6 +49,13 @@ const PercentageCalculator = () => {
     }));
   };
 
+  const handlePresetClick = (percentage) => {
+    setValues(prev => ({
+      ...prev,
+      commissionRate: percentage.toString()
+    }));
+  };
+
   const copyValue = (value) => {
     if (value) {
       navigator.clipboard.writeText(`THB ${value}`);
@@ -60,6 +69,8 @@ const PercentageCalculator = () => {
       maximumFractionDigits: 2
     })}`;
   };
+
+  const presetPercentages = [22, 30, 32];
 
   const fields = [
     {
@@ -122,6 +133,27 @@ const PercentageCalculator = () => {
                     ) : null
                   }}
                 />
+                
+                {/* Preset buttons for commission rate */}
+                {field.key === 'commissionRate' && (
+                  <Box sx={{ mb: 2 }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                      Quick select:
+                    </Typography>
+                    <ButtonGroup size="small" variant="outlined">
+                      {presetPercentages.map((percent) => (
+                        <Button
+                          key={percent}
+                          onClick={() => handlePresetClick(percent)}
+                          variant={values.commissionRate === percent.toString() ? "contained" : "outlined"}
+                          sx={{ minWidth: 60 }}
+                        >
+                          {percent}%
+                        </Button>
+                      ))}
+                    </ButtonGroup>
+                  </Box>
+                )}
                 
                 {values[field.key] && field.key === 'retailPrice' && (
                   <Alert 
