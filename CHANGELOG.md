@@ -51,6 +51,16 @@
 - Improved mobile responsiveness: header layout adapts for small screens, stacking elements vertically.
 - Company name field is now persisted in localStorage and remembered across sessions.
 
+## v1.8.0
+- **NEW: Commission Calculator** - Smart commission calculator with three fields in one compact card
+- Enter "Amount you will get paid" and "Commission rate" to automatically calculate "Suggested retail price"
+- Retail price field is read-only with copy button for easy sharing
+- Perfect for tour pricing calculations and commission scenarios
+- Calculator icon replaces "Percentage Calculator" text in tab navigation
+- **NEW: Clear Cache Button** - One-click button to clear all localStorage data and reset app
+- Positioned next to dark/light mode toggle in header
+- Clears all saved data and reloads page for fresh start
+
 ---
 
 For a full commit history, see the [GitHub repo](https://github.com/majidorc/text-generator/commits/main). 

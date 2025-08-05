@@ -6,13 +6,15 @@ This project is a modern, responsive web app built with Next.js and Material-UI 
 
 - **Operator Form**: Enter booking number, program, name, tour date, hotel, phone, address options, PAX (adults, children, infants), cash on tour, and national park fee. Instantly generates a confirmation message you can copy/share. Automatically copies the confirmation to your clipboard after submit. **Click the CLEAR button to instantly reset all fields, including the shared name.**
 - **Customer Form**: Enter tour date, name, pick up (auto-filled from hotel in Operator Form), pickup time (from/to), and optionally FEE Adult/Child fields. Instantly preview and copy a formatted confirmation email. The confirmation always greets the customer by name ("Hello [Name]") after submission, and now always shows the Name after "Hello" in the output. The company name field in the header only appears when the Customer Form tab is selected, and the confirmation output uses this value if set (otherwise defaults to "Thailand Tours"). Toggle FEE fields by clicking "With Fee". **Click the CLEAR button to instantly reset all fields, including the shared name.**
-- **Unified Header**: Easily switch between Operator Form and Customer Form using the top menu. The dark/light mode toggle is now in the header for quick access. The header is fully responsive and the company name field is only visible on the Customer Form tab.
+- **Commission Calculator**: Smart commission calculator with three fields in one compact card. Enter "Amount you will get paid" and "Commission rate" to automatically calculate the "Suggested retail price". The retail price field is read-only and includes a copy button for easy sharing. Perfect for tour pricing calculations.
+- **Unified Header**: Easily switch between Operator Form, Customer Form, and Commission Calculator using the top menu. The dark/light mode toggle and clear cache button are in the header for quick access. The header is fully responsive and the company name field is only visible on the Customer Form tab.
 - **Dark/Light Mode**: Toggle between beautiful dark and light themes. All elements adapt automatically.
+- **Clear Cache**: One-click button to clear all localStorage data and reset the app to fresh state.
 - **Auto-Sync Fields**: Hotel field in Operator Form always syncs to Pick Up in Customer Form (unless address option is Send Later or No Transfer).
 - **Consistent UI**: All action buttons are the same size, styled for both dark and light mode, and always contained within the form box.
 - **PWA (Progressive Web App) Support**: Install this app on your device for a native-like experience. Works offline and can be added to your home screen on mobile and desktop. Manifest is fully PWA Builder compliant.
 - Fully responsive and easy to use on any device.
-- Built and iterated **super fast and easily with the help of this AI assistant ([\@cursor](https://github.com/getcursor/cursor))**
+- Built and iterated **super fast and easily with the help of this AI assistant ([@cursor](https://github.com/getcursor/cursor))**
 
 ## PWA Features
 
@@ -59,9 +61,9 @@ If you want a visible install button in the app, you can add a custom install bu
 - **No backend needed**: All logic is in the frontend.
 - **Modern stack**: Next.js + MUI = fast, beautiful, and production-ready.
 - **PWA out of the box**: Install and use offline on any device.
-- **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant ([\@cursor](https://github.com/getcursor/cursor)).
+- **AI-powered development**: All features, tweaks, and fixes were made in seconds with the help of this AI assistant ([@cursor](https://github.com/getcursor/cursor)).
 - **Copy-paste ready**: You can adapt this for any operator, agency, or booking workflow.
-- **Unified header navigation**: Quickly switch between Operator Form and Customer Form.
+- **Unified header navigation**: Quickly switch between Operator Form, Customer Form, and Commission Calculator.
 - **Dark/light mode**: Instantly toggle for the best experience in any environment.
 
 ---
