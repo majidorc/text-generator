@@ -6,6 +6,7 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import CalculateIcon from "@mui/icons-material/Calculate";
 import { ThemeModeContext } from "./_app";
 import { useTheme } from "@mui/material/styles";
 import Head from 'next/head';
@@ -110,7 +111,7 @@ export default function IndexPage() {
               >
                 <Tab label="Operator Form" />
                 <Tab label="Customer Form" />
-                <Tab label="Percentage Calculator" />
+                <Tab icon={<CalculateIcon />} aria-label="Calculator" />
               </Tabs>
               {tab === 1 && (
                 <TextField
@@ -140,7 +141,7 @@ export default function IndexPage() {
               >
                 <Tab label="Operator Form" />
                 <Tab label="Customer Form" />
-                <Tab label="Percentage Calculator" />
+                <Tab icon={<CalculateIcon />} aria-label="Calculator" />
               </Tabs>
               {tab === 1 && (
                 <TextField
