@@ -149,6 +149,7 @@ const PercentageCalculator = () => {
                   fullWidth
                   size="small"
                   sx={{ mb: 2 }}
+                  disabled={field.key === 'retailPrice'}
                   InputProps={{
                     startAdornment: field.key !== 'commissionRate' ? (
                       <Typography variant="body2" sx={{ mr: 1, color: 'text.secondary' }}>
