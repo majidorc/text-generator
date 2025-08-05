@@ -35,7 +35,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
       navigator.clipboard.writeText(confirmationText(form.withFee));
     }
     // eslint-disable-next-line
-  }, [form.withFee, form.feeAdult, form.feeChild, form.exTransfer, form.pickUp, form.tourDate, form.pickupFrom, form.pickupTo, form.name, selectedDate]);
+  }, [form.withFee, form.feeAdult, form.feeChild, form.exTransfer, form.transferPerPerson, form.pickUp, form.tourDate, form.pickupFrom, form.pickupTo, form.name, selectedDate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -93,6 +93,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
       name: "",
       pickUp: "",
       exTransfer: "",
+      transferPerPerson: false,
       pickupFrom: dayjs().hour(8).minute(0),
       pickupTo: dayjs().hour(9).minute(0),
       sendNow: false,
@@ -107,8 +108,9 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
 
   const confirmationText = (fee) => {
     const company = companyName && companyName.trim() ? companyName : 'Thailand Tours';
+    const transferType = form.transferPerPerson ? 'per person' : 'private';
     const pickUpText = form.exTransfer
-      ? `Pick up: ${form.pickUp} ( extra charge for private transfer ${form.exTransfer}THB )`
+      ? `Pick up: ${form.pickUp} ( extra charge for roundtrip transfer ${form.exTransfer}THB ${transferType} )`
       : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
@@ -183,6 +185,18 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
               sx={{ bgcolor: "background.default" }}
               type="number"
               inputProps={{ min: 0 }}
+            />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={form.transferPerPerson || false}
+                  onChange={handleChange}
+                  name="transferPerPerson"
+                />
+              }
+              label="Transfer per person (uncheck for private transfer)"
             />
           </Grid>
           <Grid item xs={12} md={3}>

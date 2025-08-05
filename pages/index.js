@@ -53,6 +53,7 @@ export default function IndexPage() {
     name: "",
     pickUp: "",
     exTransfer: "",
+    transferPerPerson: false,
     pickupFrom: dayjs().hour(8).minute(0),
     pickupTo: dayjs().hour(9).minute(0),
     sendNow: false,
