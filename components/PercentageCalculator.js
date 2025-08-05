@@ -24,45 +24,21 @@ const PercentageCalculator = () => {
 
   const [lastChanged, setLastChanged] = useState('');
 
-  // Calculate the missing value when two values are provided
+  // Calculate retail price when amount paid and commission rate are provided
   useEffect(() => {
-    const { retailPrice, amountPaid, commissionRate } = values;
-    const filledFields = [retailPrice, amountPaid, commissionRate].filter(v => v !== '').length;
+    const { amountPaid, commissionRate } = values;
     
-    if (filledFields === 2) {
-      // Calculate the missing field
-      if (retailPrice && commissionRate && !amountPaid) {
-        // Calculate amount paid
-        const retail = parseFloat(retailPrice);
-        const commission = parseFloat(commissionRate);
-        const commissionAmount = retail * (commission / 100);
-        const amountPaid = retail - commissionAmount;
-        setValues(prev => ({
-          ...prev,
-          amountPaid: amountPaid.toFixed(2)
-        }));
-      } else if (retailPrice && amountPaid && !commissionRate) {
-        // Calculate commission rate
-        const retail = parseFloat(retailPrice);
-        const paid = parseFloat(amountPaid);
-        const commissionAmount = retail - paid;
-        const commissionRate = (commissionAmount / retail) * 100;
-        setValues(prev => ({
-          ...prev,
-          commissionRate: commissionRate.toFixed(2)
-        }));
-      } else if (amountPaid && commissionRate && !retailPrice) {
-        // Calculate retail price: amount paid / (1 - commission rate/100)
-        const paid = parseFloat(amountPaid);
-        const commission = parseFloat(commissionRate);
-        const retailPrice = paid / (1 - commission / 100);
-        setValues(prev => ({
-          ...prev,
-          retailPrice: retailPrice.toFixed(2)
-        }));
-      }
+    if (amountPaid && commissionRate) {
+      // Calculate retail price: amount paid / (1 - commission rate/100)
+      const paid = parseFloat(amountPaid);
+      const commission = parseFloat(commissionRate);
+      const retailPrice = paid / (1 - commission / 100);
+      setValues(prev => ({
+        ...prev,
+        retailPrice: retailPrice.toFixed(2)
+      }));
     }
-  }, [values.retailPrice, values.amountPaid, values.commissionRate]);
+  }, [values.amountPaid, values.commissionRate]);
 
   const handleInputChange = (field, value) => {
     setLastChanged(field);
