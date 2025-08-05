@@ -22,51 +22,50 @@ const PercentageCalculator = () => {
     commissionRate: ''
   });
 
-  const [activeField, setActiveField] = useState('retailPrice');
+  const [lastChanged, setLastChanged] = useState('');
 
-  // Calculate amount paid when retail price and commission rate change
+  // Calculate the missing value when two values are provided
   useEffect(() => {
-    if (values.retailPrice && values.commissionRate) {
-      const retail = parseFloat(values.retailPrice);
-      const commission = parseFloat(values.commissionRate);
-      const commissionAmount = retail * (commission / 100);
-      const amountPaid = retail - commissionAmount;
-      setValues(prev => ({
-        ...prev,
-        amountPaid: amountPaid.toFixed(2)
-      }));
+    const { retailPrice, amountPaid, commissionRate } = values;
+    const filledFields = [retailPrice, amountPaid, commissionRate].filter(v => v !== '').length;
+    
+    if (filledFields === 2) {
+      // Calculate the missing field
+      if (retailPrice && commissionRate && !amountPaid) {
+        // Calculate amount paid
+        const retail = parseFloat(retailPrice);
+        const commission = parseFloat(commissionRate);
+        const commissionAmount = retail * (commission / 100);
+        const amountPaid = retail - commissionAmount;
+        setValues(prev => ({
+          ...prev,
+          amountPaid: amountPaid.toFixed(2)
+        }));
+      } else if (retailPrice && amountPaid && !commissionRate) {
+        // Calculate commission rate
+        const retail = parseFloat(retailPrice);
+        const paid = parseFloat(amountPaid);
+        const commissionAmount = retail - paid;
+        const commissionRate = (commissionAmount / retail) * 100;
+        setValues(prev => ({
+          ...prev,
+          commissionRate: commissionRate.toFixed(2)
+        }));
+      } else if (amountPaid && commissionRate && !retailPrice) {
+        // Calculate retail price
+        const paid = parseFloat(amountPaid);
+        const commission = parseFloat(commissionRate);
+        const retailPrice = paid / (1 - commission / 100);
+        setValues(prev => ({
+          ...prev,
+          retailPrice: retailPrice.toFixed(2)
+        }));
+      }
     }
-  }, [values.retailPrice, values.commissionRate]);
-
-  // Calculate commission rate when retail price and amount paid change
-  useEffect(() => {
-    if (values.retailPrice && values.amountPaid && activeField === 'amountPaid') {
-      const retail = parseFloat(values.retailPrice);
-      const paid = parseFloat(values.amountPaid);
-      const commissionAmount = retail - paid;
-      const commissionRate = (commissionAmount / retail) * 100;
-      setValues(prev => ({
-        ...prev,
-        commissionRate: commissionRate.toFixed(2)
-      }));
-    }
-  }, [values.retailPrice, values.amountPaid, activeField]);
-
-  // Calculate retail price when amount paid and commission rate change
-  useEffect(() => {
-    if (values.amountPaid && values.commissionRate && activeField === 'retailPrice') {
-      const paid = parseFloat(values.amountPaid);
-      const commission = parseFloat(values.commissionRate);
-      const retailPrice = paid / (1 - commission / 100);
-      setValues(prev => ({
-        ...prev,
-        retailPrice: retailPrice.toFixed(2)
-      }));
-    }
-  }, [values.amountPaid, values.commissionRate, activeField]);
+  }, [values.retailPrice, values.amountPaid, values.commissionRate]);
 
   const handleInputChange = (field, value) => {
-    setActiveField(field);
+    setLastChanged(field);
     setValues(prev => ({
       ...prev,
       [field]: value
@@ -195,8 +194,10 @@ const PercentageCalculator = () => {
           How it works
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          • Enter any two values to calculate the third
-          • Commission rate is automatically calculated as a percentage
+          • Enter any two values to calculate the third automatically
+          • You can start with commission rate + amount paid → calculates retail price
+          • Or start with retail price + commission rate → calculates amount paid
+          • Or start with retail price + amount paid → calculates commission rate
           • All amounts are displayed in Thai Baht (THB)
           • Click the copy icon to copy values to clipboard
         </Typography>
