@@ -30,7 +30,6 @@ function TabPanel({ children, value, index }) {
 export default function IndexPage() {
   const [tab, setTab] = useState(0);
   const [sharedName, setSharedName] = useState("");
-  const [headerText, setHeaderText] = useState("");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   // Operator form state
@@ -75,20 +74,7 @@ export default function IndexPage() {
     }
   };
 
-  // Load company name from localStorage on mount
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('companyName');
-      if (saved) setHeaderText(saved);
-    }
-  }, []);
 
-  // Save company name to localStorage whenever it changes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('companyName', headerText);
-    }
-  }, [headerText]);
 
   useEffect(() => {
     if (
@@ -124,16 +110,7 @@ export default function IndexPage() {
                 <Tab label="Customer Form" />
                 <Tab icon={<CalculateIcon />} aria-label="Calculator" />
               </Tabs>
-              {tab === 1 && (
-                <TextField
-                  label="Your Company Name"
-                  value={headerText}
-                  onChange={e => setHeaderText(e.target.value)}
-                  size="small"
-                  fullWidth
-                  sx={{ mb: 1 }}
-                />
-              )}
+
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
                 <IconButton onClick={handleClearCache} color="inherit" aria-label="clear cache" title="Clear Cache">
                   <ClearIcon />
@@ -157,15 +134,7 @@ export default function IndexPage() {
                 <Tab label="Customer Form" />
                 <Tab icon={<CalculateIcon />} aria-label="Calculator" />
               </Tabs>
-              {tab === 1 && (
-                <TextField
-                  label="Your Company Name"
-                  value={headerText}
-                  onChange={e => setHeaderText(e.target.value)}
-                  size="small"
-                  sx={{ minWidth: 180, mx: 2 }}
-                />
-              )}
+
               <Box sx={{ display: 'flex', gap: 1 }}>
                 <IconButton onClick={handleClearCache} color="inherit" aria-label="clear cache" title="Clear Cache">
                   <ClearIcon />
@@ -183,7 +152,6 @@ export default function IndexPage() {
             setSharedName={setSharedName}
             form={operatorForm}
             setForm={setOperatorForm}
-            companyName={headerText}
           />
         </TabPanel>
         <TabPanel value={tab} index={1}>
@@ -192,7 +160,6 @@ export default function IndexPage() {
             setSharedName={setSharedName}
             form={customerForm}
             setForm={setCustomerForm}
-            companyName={headerText}
           />
         </TabPanel>
         <TabPanel value={tab} index={2}>

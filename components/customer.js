@@ -23,7 +23,7 @@ import { useDate } from '../contexts/DateContext';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export default function Customer({ sharedName, setSharedName, form, setForm, companyName }) {
+export default function Customer({ sharedName, setSharedName, form, setForm }) {
   const { selectedDate, setSelectedDate } = useDate();
   const [showConfirm, setShowConfirm] = React.useState(false);
   const [snackbar, setSnackbar] = React.useState({ open: false, message: "" });
@@ -107,8 +107,8 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
   };
 
   const confirmationText = (fee) => {
-    const company = companyName && companyName.trim() ? companyName : 'Thailand Tours';
-    const transferText = form.transferPerPerson 
+    const company = 'Thailand Tours';
+    const transferText = form.transferPerPerson
       ? `extra charge for roundtrip transfer ${form.exTransfer}THB per person`
       : `extra charge for Private Roundtrip transfer ${form.exTransfer}THB`;
     const pickUpText = form.exTransfer
@@ -322,7 +322,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm, com
           <pre style={{ color: "#fff", fontFamily: "inherit", fontSize: 16, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
             {confirmationText(form.withFee)}
           </pre>
-          <Button variant="contained" sx={{ bgcolor: "#a084e8", mt: 2 }} onClick={() => {navigator.clipboard.writeText(confirmationText(form.withFee)); setSnackbar({ open: true, message: "Copied to clipboard!" });}}>
+          <Button variant="contained" sx={{ bgcolor: "#a084e8", mt: 2 }} onClick={() => { navigator.clipboard.writeText(confirmationText(form.withFee)); setSnackbar({ open: true, message: "Copied to clipboard!" }); }}>
             Copy Email
           </Button>
         </Paper>
