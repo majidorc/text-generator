@@ -96,6 +96,9 @@ export default function IndexPage() {
       </Head>
       <Container maxWidth="xl" sx={{ mt: 2 }}>
         <Paper sx={{ p: 2, bgcolor: "background.paper", color: "text.primary", borderRadius: 2, mb: 4 }}>
+          <Box sx={{ textAlign: 'center', mb: 1, fontWeight: 700, fontSize: { xs: 16, sm: 18 }, letterSpacing: 0.5 }}>
+            Kos Nane Saeid o SAM
+          </Box>
           {isMobile ? (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <Tabs

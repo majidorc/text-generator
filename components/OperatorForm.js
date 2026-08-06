@@ -112,7 +112,7 @@ export default function OperatorForm({ sharedName, setSharedName, form, setForm 
   }
 
   function buildConfirmationText() {
-    const lines = [];
+    const lines = ["Kos Nane Saeid o SAM\n"];
     if (form.addressOption === "without") {
       lines.push("Please confirm the for this booking:\n");
     } else {

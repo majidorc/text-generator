@@ -116,6 +116,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
       : `Pick up: ${form.pickUp}`;
     if (fee) {
       return (
+        `Kos Nane Saeid o SAM\n\n` +
         `Hello ${sharedName || ""} ,\n\n` +
         `Warm Greetings from ${company}\nThank you for choosing to book your trip with us!\n\n` +
         `We are pleased to confirm your booking, as detailed below.\n\n` +
@@ -129,7 +130,7 @@ export default function Customer({ sharedName, setSharedName, form, setForm }) {
         `Best Regards,\n${company} team`
       );
     }
-    let text = `Hello ${sharedName} ,\n\nWarm Greetings from ${company}\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\n${pickUpText}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
+    let text = `Kos Nane Saeid o SAM\n\nHello ${sharedName} ,\n\nWarm Greetings from ${company}\nThank you for choosing to book your trip with us!\n\nWe are pleased to confirm your booking, as detailed below.\n\nTour date: ${form.tourDate ? dayjs(form.tourDate).format("DD MMM YYYY") : ""}\n${pickUpText}\nPickup time: ${form.pickupFrom ? dayjs(form.pickupFrom).format("HH:mm") : ""} ~ ${form.pickupTo ? dayjs(form.pickupTo).format("HH:mm") : ""}`;
     text += `\n\n** Please be prepared and ready at the reception a few minutes before, and please note that the driver could be late by 15-30 minutes due to traffic and unwanted clauses.\nWe will try to be on time as possible , please just call us if driver be later more than 10 mins**\n\nShould you require any other assistance, please do not hesitate to contact us at anytime by replying to this email.\n\nWe wish you a great day and a fantastic trip!\n\nBest Regards,\n${company} team`;
     return text;
   };
